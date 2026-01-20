@@ -1,0 +1,217 @@
+---
+// Desktop navigation links
+const navLinks = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#capabilities', label: 'Capabilities' },
+  { href: '/#precision', label: 'Precision' },
+  { href: '/#contact', label: 'Contact' },
+];
+
+// Mobile navigation links (includes Home, Quote and Privacy Policy)
+const mobileNavLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#capabilities', label: 'Capabilities' },
+  { href: '/#precision', label: 'Precision' },
+  { href: '/#contact', label: 'Contact' },
+  { href: '/#quote', label: 'Get Quote' },
+  { href: '/privacy', label: 'Privacy Policy' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 bg-steel-950/80 backdrop-blur-md border-b border-steel-800/50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <nav class="flex items-center justify-between h-20">
+
+      <a href="/" class="flex items-center gap-3 sm:gap-4 group">
+
+        <div class="relative h-12 sm:h-14 w-auto flex items-center justify-center">
+
+          <svg height="40" viewBox="0 0 85 55" fill="currentColor" class="sm:h-[46px] text-white group-hover:text-laser transition-colors duration-300">
+
+            <path d="M0 0 H13 V40 H0 V0 Z" />
+            <path d="M14 40 H26 L26 20 Z" />
+
+            <path d="M30 40 L45 40 L37 13 Z" />
+            <path d="M38.5 8 L48 40 L61 40 L49 0 H40.5 Z" />
+            <path d="M54.5 8 L64 40 L77 40 L65 0 H56.5 Z" />
+
+            <text x="73" y="8" font-family="Arial" font-size="10" fill="currentColor">®</text>
+
+            <text x="15.5" y="52" font-family="Arial, sans-serif" font-weight="bold" font-size="7" text-anchor="middle" fill="currentColor">Precision</text>
+
+            <text x="59" y="52" font-family="Arial, sans-serif" font-weight="bold" font-size="7" text-anchor="middle" fill="currentColor">Engraving</text>
+
+          </svg>
+        </div>
+
+        <!-- Mobile: Show company name -->
+        <div class="flex sm:hidden flex-col justify-center">
+          <span class="font-display font-bold text-base text-white leading-none tracking-wide group-hover:text-laser transition-colors">L M PRECISION</span>
+          <span class="font-mono text-[8px] text-steel-500 uppercase tracking-widest">Industrial Engraving</span>
+        </div>
+
+        <!-- Desktop: Show full company info -->
+        <div class="hidden sm:flex flex-col justify-center border-l border-steel-700 pl-4 h-10">
+          <span class="font-display font-bold text-lg text-white leading-none tracking-wide group-hover:text-laser transition-colors">L M PRECISION</span>
+          <span class="font-mono text-[10px] text-steel-500 uppercase tracking-widest">Pte Ltd</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="relative px-5 py-2 font-mono text-sm text-steel-300 hover:text-white transition-colors duration-200 group"
+          >
+            <span class="relative z-10">{link.label}</span>
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-laser group-hover:w-full transition-all duration-300"></span>
+          </a>
+        ))}
+        <a
+          href="/#quote"
+          class="ml-4 px-6 py-2.5 bg-laser text-white font-display text-sm tracking-wider uppercase hover:bg-laser-glow transition-colors duration-200 relative overflow-hidden group"
+        >
+          <span class="relative z-10">Get Quote</span>
+          <span class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12"></span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 group relative z-50"
+        aria-label="Toggle Menu"
+        aria-expanded="false"
+      >
+        <span id="hamburger-top" class="w-6 h-0.5 bg-steel-300 group-hover:bg-laser transition-all duration-300 origin-center"></span>
+        <span id="hamburger-middle" class="w-6 h-0.5 bg-steel-300 group-hover:bg-laser transition-all duration-300"></span>
+        <span id="hamburger-bottom" class="w-4 h-0.5 bg-steel-300 group-hover:bg-laser transition-all duration-300 ml-auto origin-center"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 bg-steel-950/90 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+></div>
+
+<!-- Mobile Menu Panel -->
+<nav
+  id="mobile-menu"
+  class="fixed top-0 right-0 h-full w-80 bg-steel-950 border-l border-steel-800 z-40 transform translate-x-full transition-transform duration-300 ease-out md:hidden overflow-y-auto"
+>
+  <!-- Decorative corner accents -->
+  <div class="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-laser/20"></div>
+  <div class="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-laser/20"></div>
+
+  <!-- Subtle background glow -->
+  <div class="absolute top-1/4 right-0 w-32 h-32 bg-laser/5 blur-[60px] pointer-events-none"></div>
+
+  <div class="flex flex-col h-full pt-24 pb-8 px-6 relative">
+
+    <!-- Menu Header -->
+    <div class="mb-6 pb-4 border-b border-steel-800">
+      <span class="font-mono text-[10px] tracking-[0.3em] text-steel-500 uppercase">Navigation</span>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="flex flex-col gap-1">
+      {mobileNavLinks.map((link, index) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link group flex items-center gap-4 py-4 px-4 hover:bg-steel-900/50 transition-all duration-200 relative"
+        >
+          <span class="font-mono text-[10px] text-steel-600 w-6">0{index + 1}</span>
+          <span class="font-display text-lg text-steel-200 group-hover:text-white transition-colors">{link.label}</span>
+          <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-laser">→</span>
+          <span class="absolute bottom-0 left-6 right-4 h-[1px] bg-steel-800/50"></span>
+        </a>
+      ))}
+    </div>
+
+    <!-- Footer branding -->
+    <div class="mt-auto pt-8">
+      <div class="border-t border-steel-800 pt-6">
+        <div class="font-mono text-[10px] tracking-[0.2em] text-steel-600 uppercase">Precision Engraving</div>
+        <div class="font-display text-sm text-steel-400 mt-1">Singapore</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOverlay = document.getElementById('mobile-menu-overlay');
+  const hamburgerTop = document.getElementById('hamburger-top');
+  const hamburgerMiddle = document.getElementById('hamburger-middle');
+  const hamburgerBottom = document.getElementById('hamburger-bottom');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu?.classList.remove('translate-x-full');
+      menuOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+      menuOverlay?.classList.add('opacity-100', 'pointer-events-auto');
+      menuButton?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+
+      // Animate hamburger to X
+      hamburgerTop?.classList.add('rotate-45', 'translate-y-2');
+      hamburgerMiddle?.classList.add('opacity-0');
+      hamburgerBottom?.classList.add('-rotate-45', '-translate-y-2', 'w-6');
+    } else {
+      // Close menu
+      mobileMenu?.classList.add('translate-x-full');
+      menuOverlay?.classList.add('opacity-0', 'pointer-events-none');
+      menuOverlay?.classList.remove('opacity-100', 'pointer-events-auto');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      // Animate X back to hamburger
+      hamburgerTop?.classList.remove('rotate-45', 'translate-y-2');
+      hamburgerMiddle?.classList.remove('opacity-0');
+      hamburgerBottom?.classList.remove('-rotate-45', '-translate-y-2', 'w-6');
+    }
+  }
+
+  function closeMenu() {
+    if (isMenuOpen) {
+      toggleMenu();
+    }
+  }
+
+  // Toggle menu on button click
+  menuButton?.addEventListener('click', toggleMenu);
+
+  // Close menu on overlay click
+  menuOverlay?.addEventListener('click', closeMenu);
+
+  // Close menu when a nav link is clicked
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && isMenuOpen) {
+      closeMenu();
+    }
+  });
+</script>

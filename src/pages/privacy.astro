@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = new Date().toLocaleDateString('en-SG', { 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+});
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Privacy Policy for L M Precision Pte Ltd. Learn how we handle your information when you contact us for laser engraving and mold marking services."
+  canonicalPath="/privacy"
+>
+  
+  <Header />
+
+  <main class="pt-32 pb-24 lg:pb-32 relative bg-steel-900/30 min-h-screen overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+    <div class="absolute top-1/4 left-0 w-1/3 h-80 bg-laser/5 blur-[120px] -translate-x-1/4"></div>
+    <div class="absolute bottom-1/4 right-0 w-1/4 h-64 bg-precision-cyan/5 blur-[100px] translate-x-1/4"></div>
+
+    <div class="max-w-3xl mx-auto px-6 lg:px-8 relative">
+      
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-laser"></span>
+          <span class="font-mono text-xs tracking-[0.3em] text-laser uppercase">Legal</span>
+        </div>
+        
+        <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+          Privacy <span class="text-laser">Policy</span>
+        </h1>
+        
+        <p class="font-mono text-sm text-steel-500">
+          Last updated: {lastUpdated}
+        </p>
+      </div>
+
+      <div class="space-y-10 font-body text-steel-300 leading-relaxed">
+        
+        <div class="bg-steel-950 border border-steel-800 p-6 lg:p-8">
+          <p class="text-lg text-steel-200">
+            L M Precision Engineering Pte Ltd ("we", "us", or "our") respects your privacy. This policy explains how we handle information when you visit our website or contact us.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-semibold text-white mb-4 flex items-center gap-3">
+            <span class="w-8 h-8 flex items-center justify-center bg-laser/10 border border-laser/30 text-laser text-sm font-bold">1</span>
+            Information We Collect
+          </h2>
+          <div class="pl-11 space-y-4">
+            <p><strong class="text-white">We do not collect personal information automatically.</strong> This website does not use cookies or analytics tracking.</p>
+            <p>If you contact us directly via email or phone, we will receive only the information you choose to provide (name, email, technical drawings).</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-semibold text-white mb-4 flex items-center gap-3">
+            <span class="w-8 h-8 flex items-center justify-center bg-laser/10 border border-laser/30 text-laser text-sm font-bold">2</span>
+            How We Use Your Information
+          </h2>
+          <div class="pl-11 space-y-4">
+            <p>When you email us a quote request, we use your contact information solely to:</p>
+            <ul class="space-y-2 text-steel-400">
+              <li class="flex items-start gap-3"><span class="text-laser mt-1.5">›</span><span>Respond to your inquiry</span></li>
+              <li class="flex items-start gap-3"><span class="text-laser mt-1.5">›</span><span>Provide quotations</span></li>
+              <li class="flex items-start gap-3"><span class="text-laser mt-1.5">›</span><span>Communicate about ongoing projects</span></li>
+            </ul>
+            <p>We do not share your information with third parties for marketing.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-semibold text-white mb-4 flex items-center gap-3">
+            <span class="w-8 h-8 flex items-center justify-center bg-laser/10 border border-laser/30 text-laser text-sm font-bold">3</span>
+            Data Retention
+          </h2>
+          <div class="pl-11">
+            <p>We retain business records as necessary for operational and legal purposes. To request deletion, please <a href="/#contact" class="text-laser hover:underline">contact us</a>.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-semibold text-white mb-4 flex items-center gap-3">
+            <span class="w-8 h-8 flex items-center justify-center bg-laser/10 border border-laser/30 text-laser text-sm font-bold">4</span>
+            Your Rights Under PDPA
+          </h2>
+          <div class="pl-11 space-y-4">
+            <p>Under Singapore's PDPA, you have the right to access, correct, or withdraw consent for your data. To exercise these rights, please <a href="/#contact" class="text-laser hover:underline">contact us</a>.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+</Layout>

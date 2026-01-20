@@ -1,0 +1,141 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+}
+
+const defaultDescription = "Singapore's specialist in laser mold engraving, custom marking dies, steel stamps, rolling dies, electrode engraving for EDM, and industrial laser marking. Over 40 years of precision engineering excellence.";
+
+const {
+  title,
+  description = defaultDescription,
+  canonicalPath = ""
+} = Astro.props;
+
+const siteUrl = "https://www.lmprecision.com.sg";
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const fullTitle = `${title} | L M Precision Pte Ltd`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="laser engraving Singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking, CNC engraving, traceability marking, QR code marking, barcode engraving, precision engraving Singapore" />
+    <meta name="author" content="L M Precision Pte Ltd" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Geographic Meta Tags -->
+    <meta name="geo.region" content="SG" />
+    <meta name="geo.placename" content="Singapore" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="L M Precision Pte Ltd" />
+    <meta property="og:locale" content="en_SG" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data - LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "L M Precision Pte Ltd",
+        "description": "Singapore's specialist in laser mold engraving, custom marking dies, and industrial laser marking services with over 40 years of experience.",
+        "url": "https://www.lmprecision.com.sg",
+        "telephone": "+65 6316 6009",
+        "email": "lm.precision@yahoo.com.sg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "50 Bukit Batok Street 23, #03-27 Midview Building",
+          "addressLocality": "Singapore",
+          "postalCode": "659578",
+          "addressCountry": "SG"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "1.3494",
+          "longitude": "103.7545"
+        },
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "priceRange": "$$",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Singapore"
+        },
+        "serviceType": ["Laser Engraving", "Mold Engraving", "Custom Marking Dies", "Industrial Laser Marking", "Electrode Engraving"],
+        "foundingDate": "1984"
+      }
+    </script>
+  </head>
+  <body class="bg-steel-950 text-steel-100 font-body antialiased overflow-x-hidden">
+    <!-- Grain overlay -->
+    <div class="fixed inset-0 pointer-events-none bg-noise opacity-50 z-50"></div>
+    
+    <!-- Grid background -->
+    <div class="fixed inset-0 pointer-events-none bg-grid-pattern bg-[size:60px_60px] opacity-100"></div>
+    
+    <slot />
+    
+    <style is:global>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #18181b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #41414b;
+        border-radius: 0;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ff3d00;
+      }
+
+      /* Selection */
+      ::selection {
+        background: rgba(255, 61, 0, 0.3);
+        color: #fff;
+      }
+
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Animation delays */
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      .delay-400 { animation-delay: 0.4s; }
+      .delay-500 { animation-delay: 0.5s; }
+      .delay-600 { animation-delay: 0.6s; }
+    </style>
+  </body>
+</html>

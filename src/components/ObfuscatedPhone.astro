@@ -1,0 +1,154 @@
+---
+/**
+ * ObfuscatedPhone.astro
+ *
+ * Anti-spam phone component that:
+ * 1. Stores phone number in encrypted form (invisible to bots)
+ * 2. Renders phone ONLY via JavaScript (no plaintext in HTML)
+ * 3. Provides copy-to-clipboard and tel: link functionality
+ * 4. Includes honeypot traps to catch bots
+ */
+
+interface Props {
+  /** Phone number to display */
+  phone?: string;
+  /** Display label */
+  label?: string;
+}
+
+const {
+  phone = "+65 6316 6009",
+  label = "Phone"
+} = Astro.props;
+
+// Multi-layer encoding: Base64 + reverse for obfuscation
+const encodedPhone = Buffer.from(phone).toString('base64');
+const scrambledPhone = encodedPhone.split('').reverse().join('');
+---
+
+<button
+  class="obfuscated-phone-btn group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors w-full text-left cursor-pointer"
+  data-p={scrambledPhone}
+  aria-label="Phone contact"
+>
+  <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+    </svg>
+  </div>
+  <div>
+    <div class="phone-label font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors">
+      {label} <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">- Click to copy</span>
+    </div>
+    <!-- Phone rendered via JS only - no plaintext in HTML -->
+    <div class="phone-display font-display text-lg text-white" aria-live="polite">
+      <span class="phone-placeholder text-steel-500">Loading...</span>
+    </div>
+  </div>
+</button>
+
+<style>
+  .phone-placeholder {
+    font-style: italic;
+  }
+
+  /*
+   * Honeypot traps with fake phone numbers
+   */
+
+  /* Honeypot 1: Classic off-screen fake phone */
+  .obfuscated-phone-btn::before {
+    content: "+1 555 123 4567";
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+    speak: never;
+  }
+
+  /* Honeypot 2: Zero-size container with fake phone */
+  .obfuscated-phone-btn::after {
+    content: "+44 20 7946 0958";
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+</style>
+
+<!-- Hidden honeypot form field that bots might fill -->
+<div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+  <input type="tel" name="phone_hp" tabindex="-1" autocomplete="off" value="+1-800-555-0199" />
+</div>
+
+<script>
+  // Unscramble: reverse the string, then base64 decode
+  function unscramblePhone(str: string): string {
+    try {
+      const reversed = str.split('').reverse().join('');
+      return atob(reversed);
+    } catch {
+      return '';
+    }
+  }
+
+  // Get phone from scrambled data
+  function getPhone(el: HTMLElement): string {
+    return unscramblePhone(el.dataset.p || '');
+  }
+
+  // Render phone after page load (delayed to avoid bot detection)
+  function initPhoneDisplay() {
+    document.querySelectorAll('.obfuscated-phone-btn').forEach((btn) => {
+      const button = btn as HTMLElement;
+      const display = button.querySelector('.phone-display');
+      const placeholder = button.querySelector('.phone-placeholder');
+
+      if (display && placeholder) {
+        const phone = getPhone(button);
+        if (phone) {
+          // Replace placeholder with actual phone
+          placeholder.remove();
+          display.textContent = phone;
+        }
+      }
+    });
+  }
+
+  // Delay phone rendering slightly to ensure bots don't catch it
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initPhoneDisplay, 100);
+    });
+  } else {
+    setTimeout(initPhoneDisplay, 100);
+  }
+
+  // Initialize click handlers
+  document.querySelectorAll('.obfuscated-phone-btn').forEach((btn) => {
+    const button = btn as HTMLElement;
+
+    button.addEventListener('click', async () => {
+      const phone = getPhone(button);
+      const label = button.querySelector('.phone-label');
+
+      try {
+        await navigator.clipboard.writeText(phone);
+
+        if (label) {
+          const originalHTML = label.innerHTML;
+          label.innerHTML = '<span class="text-emerald-500 font-bold">COPIED!</span>';
+
+          setTimeout(() => {
+            label.innerHTML = originalHTML;
+          }, 2000);
+        }
+      } catch (err) {
+        // Fallback: open tel: link if clipboard fails
+        const cleanPhone = phone.replace(/\s/g, '');
+        window.location.href = `tel:${cleanPhone}`;
+      }
+    });
+  });
+</script>

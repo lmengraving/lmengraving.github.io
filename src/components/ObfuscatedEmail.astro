@@ -1,0 +1,232 @@
+---
+/**
+ * ObfuscatedEmail.astro
+ *
+ * Anti-spam email component that:
+ * 1. Stores email in encrypted/split parts (invisible to bots)
+ * 2. Renders email ONLY via JavaScript (no plaintext in HTML)
+ * 3. Assembles the email only after page load
+ * 4. Provides copy-to-clipboard and mailto functionality
+ * 5. Includes honeypot traps to catch bots
+ */
+
+interface Props {
+  /** Email username (before @) */
+  user?: string;
+  /** Email domain (after @) */
+  domain?: string;
+  /** Subject line for mailto */
+  subject?: string;
+  /** Pre-filled body for mailto */
+  body?: string;
+  /** Display style: 'button' | 'inline' */
+  variant?: 'button' | 'inline';
+}
+
+const {
+  user = "lm.engraving",
+  domain = "yahoo.com.sg",
+  subject = "Quote Request - [Company Name]",
+  body = "Hi L M Precision,%0D%0A%0D%0APlease provide a quote for the attached drawings.%0D%0A%0D%0AMaterial: %0D%0AQuantity: %0D%0A%0D%0AThank you,",
+  variant = 'button'
+} = Astro.props;
+
+// Multi-layer encoding: Base64 + character code array for extra obfuscation
+const encodedUser = Buffer.from(user).toString('base64');
+const encodedDomain = Buffer.from(domain).toString('base64');
+// Reverse the encoded strings to further confuse pattern matching
+const scrambledUser = encodedUser.split('').reverse().join('');
+const scrambledDomain = encodedDomain.split('').reverse().join('');
+---
+
+<!-- Button Variant (for the contact card) -->
+{variant === 'button' && (
+  <button
+    class="obfuscated-email-btn group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors w-full text-left cursor-pointer"
+    data-u={scrambledUser}
+    data-d={scrambledDomain}
+    data-s={encodeURIComponent(subject)}
+    data-b={body}
+    aria-label="Email contact"
+  >
+    <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    </div>
+    <div>
+      <div class="label-text font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors">
+        Email <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">- Click to copy</span>
+      </div>
+      <!-- Email rendered via JS only - no plaintext in HTML -->
+      <div class="email-display font-display text-lg text-white" aria-live="polite">
+        <span class="email-placeholder text-steel-500">Loading...</span>
+      </div>
+    </div>
+  </button>
+)}
+
+<!-- Inline Variant (for the quote CTA button) -->
+{variant === 'inline' && (
+  <a
+    href="#"
+    class="obfuscated-email-link block w-full py-5 bg-laser text-white font-display text-sm tracking-widest uppercase text-center hover:brightness-110 transition-all hover:scale-[1.02] relative overflow-hidden group"
+    data-u={scrambledUser}
+    data-d={scrambledDomain}
+    data-s={encodeURIComponent(subject)}
+    data-b={body}
+    aria-label="Send quote request via email"
+  >
+    <span class="relative z-10 flex items-center justify-center gap-3">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      Send Quote via Email
+    </span>
+  </a>
+)}
+
+<style>
+  /*
+   * Anti-bot CSS technique:
+   * Email is rendered entirely via JavaScript.
+   * No email text exists in the initial HTML.
+   */
+  .email-display {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .email-placeholder {
+    font-style: italic;
+  }
+
+  /*
+   * Multiple honeypot traps with varying techniques
+   * to catch different types of bots
+   */
+
+  /* Honeypot 1: Classic off-screen fake email */
+  .obfuscated-email-btn::before,
+  .obfuscated-email-link::before {
+    content: "contact@example.com";
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+    speak: never;
+  }
+
+  /* Honeypot 2: Zero-size container with fake email */
+  .obfuscated-email-btn::after,
+  .obfuscated-email-link::after {
+    content: "info@company.net";
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+</style>
+
+<!-- Hidden honeypot form field that bots might fill -->
+<div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+  <input type="email" name="email_hp" tabindex="-1" autocomplete="off" value="sales@domain.org" />
+</div>
+
+<script>
+  // Unscramble: reverse the string, then base64 decode
+  function unscramble(str: string): string {
+    try {
+      const reversed = str.split('').reverse().join('');
+      return atob(reversed);
+    } catch {
+      return '';
+    }
+  }
+
+  // Assemble email from scrambled parts
+  function assembleEmail(el: HTMLElement): string {
+    const u = unscramble(el.dataset.u || '');
+    const d = unscramble(el.dataset.d || '');
+    if (!u || !d) return '';
+    return `${u}@${d}`;
+  }
+
+  // Generate mailto link
+  function createMailto(el: HTMLElement): string {
+    const email = assembleEmail(el);
+    const subject = decodeURIComponent(el.dataset.s || '');
+    const body = el.dataset.b || '';
+    return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+  }
+
+  // Render email after page load (delayed to avoid bot detection)
+  function initEmailDisplay() {
+    document.querySelectorAll('.obfuscated-email-btn').forEach((btn) => {
+      const button = btn as HTMLElement;
+      const display = button.querySelector('.email-display');
+      const placeholder = button.querySelector('.email-placeholder');
+
+      if (display && placeholder) {
+        const email = assembleEmail(button);
+        if (email) {
+          // Replace placeholder with actual email
+          placeholder.remove();
+          display.textContent = email;
+        }
+      }
+    });
+  }
+
+  // Delay email rendering slightly to ensure bots don't catch it
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initEmailDisplay, 100);
+    });
+  } else {
+    setTimeout(initEmailDisplay, 100);
+  }
+
+  // Initialize all obfuscated email buttons
+  document.querySelectorAll('.obfuscated-email-btn').forEach((btn) => {
+    const button = btn as HTMLElement;
+
+    button.addEventListener('click', async () => {
+      const email = assembleEmail(button);
+      const label = button.querySelector('.label-text');
+
+      try {
+        await navigator.clipboard.writeText(email);
+
+        if (label) {
+          const originalHTML = label.innerHTML;
+          label.innerHTML = '<span class="text-emerald-500 font-bold">COPIED!</span>';
+
+          setTimeout(() => {
+            label.innerHTML = originalHTML;
+          }, 2000);
+        }
+      } catch (err) {
+        // Fallback: open mailto if clipboard fails
+        window.location.href = createMailto(button);
+      }
+    });
+  });
+
+  // Initialize all obfuscated email links (CTA buttons)
+  document.querySelectorAll('.obfuscated-email-link').forEach((link) => {
+    const anchor = link as HTMLAnchorElement;
+
+    // Prevent default and only set href on interaction
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = createMailto(anchor);
+    });
+
+    // Also set href on hover for right-click "copy link"
+    anchor.addEventListener('mouseenter', () => {
+      anchor.href = createMailto(anchor);
+    }, { once: true });
+  });
+</script>
