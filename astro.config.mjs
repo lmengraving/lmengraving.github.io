@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 // import sitemap from '@astrojs/sitemap'; <--- Comment this import out
 
 export default defineConfig({
-  site: 'https://lmengraving.github.io',
+  site: 'https://www.lmengraving.sg',
   
   // REMOVE sitemap() from this list
   integrations: [tailwind()], 
