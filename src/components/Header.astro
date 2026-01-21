@@ -1,21 +1,63 @@
 ---
+import LanguageToggle from './LanguageToggle.astro';
+
+interface Props {
+  lang?: 'en' | 'zh';
+  currentPath?: string;
+}
+
+const { lang = 'en', currentPath = '' } = Astro.props;
+
+// Base path for links (empty for English, /zh for Chinese)
+const basePath = lang === 'zh' ? '/zh' : '';
+
+// Navigation labels by language
+const labels = {
+  en: {
+    services: 'Services',
+    capabilities: 'Capabilities',
+    precision: 'Precision',
+    contact: 'Contact',
+    home: 'Home',
+    getQuote: 'Get Quote',
+    privacy: 'Privacy Policy',
+    navigation: 'Navigation',
+    precisionEngraving: 'Precision Engraving',
+    singapore: 'Singapore',
+  },
+  zh: {
+    services: '服务',
+    capabilities: '能力',
+    precision: '精密',
+    contact: '联系',
+    home: '首页',
+    getQuote: '获取报价',
+    privacy: '隐私政策',
+    navigation: '导航',
+    precisionEngraving: '精密雕刻',
+    singapore: '新加坡',
+  },
+};
+
+const t = labels[lang];
+
 // Desktop navigation links
 const navLinks = [
-  { href: '/#services', label: 'Services' },
-  { href: '/#capabilities', label: 'Capabilities' },
-  { href: '/#precision', label: 'Precision' },
-  { href: '/#contact', label: 'Contact' },
+  { href: `${basePath}/#services`, label: t.services },
+  { href: `${basePath}/#capabilities`, label: t.capabilities },
+  { href: `${basePath}/#precision`, label: t.precision },
+  { href: `${basePath}/#contact`, label: t.contact },
 ];
 
 // Mobile navigation links (includes Home, Quote and Privacy Policy)
 const mobileNavLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/#services', label: 'Services' },
-  { href: '/#capabilities', label: 'Capabilities' },
-  { href: '/#precision', label: 'Precision' },
-  { href: '/#contact', label: 'Contact' },
-  { href: '/#quote', label: 'Get Quote' },
-  { href: '/privacy', label: 'Privacy Policy' },
+  { href: `${basePath}/`, label: t.home },
+  { href: `${basePath}/#services`, label: t.services },
+  { href: `${basePath}/#capabilities`, label: t.capabilities },
+  { href: `${basePath}/#precision`, label: t.precision },
+  { href: `${basePath}/#contact`, label: t.contact },
+  { href: `${basePath}/#quote`, label: t.getQuote },
+  { href: `${basePath}/privacy`, label: t.privacy },
 ];
 ---
 
@@ -23,7 +65,7 @@ const mobileNavLinks = [
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <nav class="flex items-center justify-between h-20">
 
-      <a href="/" class="flex items-center gap-3 sm:gap-4 group">
+      <a href={`${basePath}/`} class="flex items-center gap-3 sm:gap-4 group">
 
         <div class="relative h-12 sm:h-14 w-auto flex items-center justify-center">
 
@@ -70,12 +112,15 @@ const mobileNavLinks = [
           </a>
         ))}
         <a
-          href="/#quote"
+          href={`${basePath}/#quote`}
           class="ml-4 px-6 py-2.5 bg-laser text-white font-display text-sm tracking-wider uppercase hover:bg-laser-glow transition-colors duration-200 relative overflow-hidden group"
         >
-          <span class="relative z-10">Get Quote</span>
+          <span class="relative z-10">{t.getQuote}</span>
           <span class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12"></span>
         </a>
+        <div class="ml-4 border-l border-steel-700 pl-4">
+          <LanguageToggle currentLang={lang} currentPath={currentPath} />
+        </div>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -114,8 +159,9 @@ const mobileNavLinks = [
   <div class="flex flex-col h-full pt-24 pb-8 px-6 relative">
 
     <!-- Menu Header -->
-    <div class="mb-6 pb-4 border-b border-steel-800">
-      <span class="font-mono text-[10px] tracking-[0.3em] text-steel-500 uppercase">Navigation</span>
+    <div class="mb-6 pb-4 border-b border-steel-800 flex items-center justify-between">
+      <span class="font-mono text-[10px] tracking-[0.3em] text-steel-500 uppercase">{t.navigation}</span>
+      <LanguageToggle currentLang={lang} currentPath={currentPath} />
     </div>
 
     <!-- Navigation Links -->
@@ -136,8 +182,8 @@ const mobileNavLinks = [
     <!-- Footer branding -->
     <div class="mt-auto pt-8">
       <div class="border-t border-steel-800 pt-6">
-        <div class="font-mono text-[10px] tracking-[0.2em] text-steel-600 uppercase">Precision Engraving</div>
-        <div class="font-display text-sm text-steel-400 mt-1">Singapore</div>
+        <div class="font-mono text-[10px] tracking-[0.2em] text-steel-600 uppercase">{t.precisionEngraving}</div>
+        <div class="font-display text-sm text-steel-400 mt-1">{t.singapore}</div>
       </div>
     </div>
   </div>

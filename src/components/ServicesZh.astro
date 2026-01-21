@@ -1,0 +1,172 @@
+---
+const services = [
+  {
+    number: '01',
+    title: '定制打标模具与工装',
+    description: '设计耐用钢印与滚压模具，用于永久性零件标识与品牌应用。',
+    capabilities: [
+      { name: '旋转与滚压模具', detail: '精密雕刻滚轮，用于圆柱或平面表面的连续打标。' },
+      { name: '冲击与压力钢印', detail: '重型钢印，用于金属冲压与压纹应用。' },
+      { name: '烫金模具', detail: '导热黄铜与钢制模具，用于包装与装饰性品牌打标。' }
+    ],
+    icon: `<path d="M12 36L24 8L36 36" stroke="currentColor" stroke-width="2"/><path d="M16 28H32" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="8" r="3" stroke="currentColor" stroke-width="2"/>`
+  },
+  {
+    number: '02',
+    title: '工业激光打标与纹理加工',
+    description: '非接触式永久性打标解决方案，用于品牌标识、功能性纹理与定制组件雕刻。',
+    capabilities: [
+      { name: '深度雕刻', detail: '高深度材料去除，用于模具型腔与 3D 纹理。' },
+      { name: '激光退火', detail: '不锈钢与钛合金上的耐腐蚀黑色标记（医疗/航空航天应用）。' },
+      { name: '条形码、二维码与 UID', detail: '精密打标序列号、条形码与二维码，实现产品全流程追溯。' }
+    ],
+    icon: `<path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="M24 10V18M24 30V38M10 24H18M30 24H38" stroke="currentColor" stroke-width="1.5"/>`
+  },
+  {
+    number: '03',
+    title: '3D CNC 与激光雕刻',
+    description: '结合 CNC 加工与激光技术的先进三维雕刻，适用于模具与产品。',
+    capabilities: [
+      { name: '多轴 CNC 加工', detail: '黄铜、紫铜、铝、不锈钢及淬硬钢的复杂 3D 几何形状与深腔雕刻。' },
+      { name: '3D 激光雕刻', detail: '5轴激光技术，用于侧壁、轮廓及复杂模具表面几何形状。' },
+      { name: '3D 图形与 Logo', detail: '在成型应用的轮廓表面上雕刻三维形状与 Logo。' }
+    ],
+    icon: `<path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="currentColor" stroke-width="2"/><path d="M24 4V44M6 14L42 34M42 14L6 34" stroke="currentColor" stroke-width="1" opacity="0.5"/><circle cx="24" cy="24" r="4" fill="currentColor"/>`
+  },
+  {
+    number: '04',
+    title: '版本 ID 与 Logo 雕刻',
+    description: '在模具组件与镶件上精密激光雕刻客户 Logo、ID、版本号及参考代码。',
+    capabilities: [
+      { name: 'Logo 雕刻', detail: '在模具型腔上雕刻定制品牌 Logo 与图形，用于永久性零件品牌标识。' },
+      { name: '型腔编号', detail: '深度雕刻型腔编号与版本级别，以便清晰识别。' },
+      { name: '组件打标', detail: '在镶件、滑块与斜顶上雕刻匹配 ID，辅助组装与维护。' }
+    ],
+    icon: `<rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="2"/><path d="M8 16H40M8 24H40M8 32H40" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><rect x="12" y="12" width="8" height="8" fill="currentColor"/><rect x="28" y="12" width="8" height="8" fill="currentColor"/>`
+  },
+  {
+    number: '05',
+    title: 'EDM 电极雕刻',
+    description: 'EDM 应用的电极激光雕刻。精密蚀刻石墨与铜电极。',
+    capabilities: [
+      { name: '石墨电极', detail: '用于 EDM 沉降加工的石墨电极精密激光蚀刻。' },
+      { name: '铜电极', detail: '雕刻铜与铜浸渍电极，呈现复杂型腔的精细细节。' },
+      { name: '火花位控制', detail: '可按指定的火花位 (Over-burn) 规格雕刻凸字或凹字。' }
+    ],
+    icon: `<circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/><path d="M24 12V36" stroke="currentColor" stroke-width="2"/><path d="M16 20L24 12L32 20" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="currentColor"/>`
+  }
+];
+---
+
+<section id="services" class="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-steel-900/30">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+  <div class="absolute top-1/3 left-0 w-1/3 h-80 bg-laser/5 blur-[120px] -translate-x-1/4"></div>
+  <div class="absolute bottom-1/4 right-0 w-1/4 h-64 bg-precision-cyan/5 blur-[100px] translate-x-1/4"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="text-center mb-10 md:mb-16 lg:mb-24">
+      <div class="inline-flex items-center gap-3 mb-4 md:mb-6">
+        <span class="w-8 h-[1px] bg-steel-600"></span>
+        <span class="font-mono text-xs tracking-[0.3em] text-steel-400 uppercase">我们的业务</span>
+        <span class="w-8 h-[1px] bg-steel-600"></span>
+      </div>
+      <h2 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 md:mb-6">
+        我们的 <span class="text-laser">服务</span>
+      </h2>
+      <p class="font-body text-base md:text-lg text-steel-400 max-w-3xl mx-auto hidden md:block">
+        从精密模具组件到先进激光加工 —— 为高要求行业提供全面的制造解决方案。
+      </p>
+    </div>
+
+    <div class="md:hidden space-y-3">
+      {services.map((service, index) => (
+        <div class="service-accordion bg-steel-900/50 border border-steel-800" data-index={index}>
+          <button
+            class="service-toggle w-full flex items-center gap-4 p-4 text-left"
+            aria-expanded="false"
+          >
+            <div class="w-10 h-10 flex items-center justify-center bg-laser/10 border border-laser/30 shrink-0">
+              <svg viewBox="0 0 48 48" fill="none" class="w-5 h-5 text-laser" set:html={service.icon} />
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-display text-base font-bold text-white truncate">{service.title}</h3>
+            </div>
+            <svg class="service-chevron w-5 h-5 text-steel-400 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="service-content hidden px-4 pb-4">
+            <p class="font-body text-steel-400 text-sm mb-4">{service.description}</p>
+            <div class="space-y-2">
+              {service.capabilities.map((cap) => (
+                <div class="flex items-start gap-2 text-sm">
+                  <span class="w-1.5 h-1.5 bg-laser rounded-full mt-1.5 shrink-0"></span>
+                  <span class="text-steel-300">{cap.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="hidden md:block space-y-8">
+      {services.map((service) => (
+        <div class="bg-steel-900/30 border border-steel-800 hover:border-laser/30 transition-all duration-500 p-8 lg:p-10">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-14 h-14 flex items-center justify-center bg-laser/10 border border-laser/30">
+                  <svg viewBox="0 0 48 48" fill="none" class="w-8 h-8 text-laser" set:html={service.icon} />
+                </div>
+                <span class="font-mono text-[10px] tracking-widest text-laser uppercase">{service.number}</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white mb-3">{service.title}</h3>
+              <p class="font-body text-steel-400 text-sm leading-relaxed">{service.description}</p>
+            </div>
+
+            <div class="lg:col-span-2">
+              <h4 class="font-mono text-[10px] tracking-widest text-steel-500 uppercase mb-4">核心能力</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {service.capabilities.map((cap) => (
+                  <div class="bg-steel-950 border border-steel-800 p-5">
+                    <div class="font-display text-lg font-semibold text-white mb-2">{cap.name}</div>
+                    <p class="font-body text-steel-400 text-xs leading-relaxed">{cap.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const accordions = document.querySelectorAll('.service-accordion');
+
+  accordions.forEach(accordion => {
+    const toggle = accordion.querySelector('.service-toggle');
+    const content = accordion.querySelector('.service-content');
+    const chevron = accordion.querySelector('.service-chevron');
+
+    toggle?.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+      // Close all other accordions
+      accordions.forEach(other => {
+        if (other !== accordion) {
+          other.querySelector('.service-toggle')?.setAttribute('aria-expanded', 'false');
+          other.querySelector('.service-content')?.classList.add('hidden');
+          other.querySelector('.service-chevron')?.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current accordion
+      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      content?.classList.toggle('hidden');
+      chevron?.classList.toggle('rotate-180');
+    });
+  });
+</script>

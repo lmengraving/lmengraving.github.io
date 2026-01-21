@@ -1,0 +1,145 @@
+<section id="precision" class="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-steel-900/30">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+  <div class="absolute top-1/2 right-0 w-1/2 h-96 bg-laser/5 blur-[100px] -translate-y-1/2"></div>
+  <div class="absolute top-1/2 left-0 w-1/3 h-64 bg-precision-cyan/5 blur-[80px] -translate-y-1/2"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="text-center mb-10 md:mb-16 lg:mb-24">
+      <div class="inline-flex items-center gap-3 mb-4 md:mb-6">
+        <span class="w-8 h-[1px] bg-steel-600"></span>
+        <span class="font-mono text-xs tracking-[0.3em] text-steel-400 uppercase">质量保证</span>
+        <span class="w-8 h-[1px] bg-steel-600"></span>
+      </div>
+      <h2 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 md:mb-6">
+        精度即 <span class="text-laser">一切</span>
+      </h2>
+      <p class="font-body text-sm md:text-lg text-steel-400 max-w-2xl mx-auto">
+        我们的质量管理体系确保每一个零件都符合规格。
+        零缺陷不仅仅是目标——它是我们的标准。
+      </p>
+    </div>
+
+    <div class="mb-12 md:mb-20">
+      <div class="relative max-w-4xl mx-auto">
+        <div class="relative h-24 md:h-32 bg-steel-900/50 border border-steel-800 overflow-hidden">
+          <div class="absolute inset-0 flex">
+            {[...Array(21)].map((_, i) => (
+              <div class="flex-1 border-r border-steel-800/50 relative">
+                {i % 5 === 0 && (
+                  <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-mono text-[8px] md:text-[10px] text-steel-600">
+                    {(i - 10) * 0.01}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[10%] h-12 md:h-16 bg-laser/20 border-l-2 border-r-2 border-laser"></div>
+
+          <div class="absolute top-0 bottom-0 left-1/2 w-[2px] bg-precision-green -translate-x-1/2"></div>
+
+          <div class="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 px-2 md:px-3 py-1 bg-steel-950 border border-laser">
+            <span class="font-mono text-[10px] md:text-xs text-laser">±0.05mm 公差</span>
+          </div>
+        </div>
+
+        <div class="mt-8 md:mt-12 text-center">
+          <p class="font-body text-sm md:text-base text-steel-400">
+            我们的标准公差为 <span class="text-white font-semibold">±0.05mm</span>。
+            我们为可互换模具镶件和精密模具保持<span class="text-laser">严格的尺寸精度</span>。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-20">
+
+      <div class="group relative bg-steel-900/30 border border-steel-800 p-5 md:p-8 hover:border-laser/30 transition-colors">
+        <div class="absolute top-3 right-3 md:top-4 md:right-4 font-display text-4xl md:text-5xl font-bold text-steel-800/50">01</div>
+        <div class="relative">
+          <div class="flex items-start gap-4 md:gap-6">
+            <div class="shrink-0 w-36">
+              <div class="font-display text-2xl md:text-3xl font-bold text-laser">100%</div>
+              <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">检测率</div>
+            </div>
+            <div>
+              <h3 class="font-display text-base md:text-lg font-semibold text-white mb-1 md:mb-2">最终检测</h3>
+              <p class="font-body text-xs md:text-sm text-steel-400">发货前进行全面的外观和尺寸验证</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative bg-steel-900/30 border border-steel-800 p-5 md:p-8 hover:border-laser/30 transition-colors">
+        <div class="absolute top-3 right-3 md:top-4 md:right-4 font-display text-4xl md:text-5xl font-bold text-steel-800/50">02</div>
+        <div class="relative">
+          <div class="flex items-start gap-4 md:gap-6">
+            <div class="shrink-0 w-36">
+              <div class="font-display text-2xl md:text-3xl font-bold text-laser">±0.05mm</div>
+              <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">标准精度</div>
+            </div>
+            <div>
+              <h3 class="font-display text-base md:text-lg font-semibold text-white mb-1 md:mb-2">精密公差</h3>
+              <p class="font-body text-xs md:text-sm text-steel-400">工装夹具与模具组件的标准加工公差</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative bg-steel-900/30 border border-steel-800 p-5 md:p-8 hover:border-laser/30 transition-colors">
+        <div class="absolute top-3 right-3 md:top-4 md:right-4 font-display text-4xl md:text-5xl font-bold text-steel-800/50">03</div>
+        <div class="relative">
+          <div class="flex items-start gap-4 md:gap-6">
+            <div class="shrink-0 w-36">
+              <div class="font-display text-2xl md:text-3xl font-bold text-laser">各类</div>
+              <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">钢材等级</div>
+            </div>
+            <div>
+              <h3 class="font-display text-base md:text-lg font-semibold text-white mb-1 md:mb-2">材料加工专长</h3>
+              <p class="font-body text-xs md:text-sm text-steel-400">专精于客户提供的工具钢（如 Stavax、D2 等）的加工</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative bg-steel-900/30 border border-steel-800 p-5 md:p-8 hover:border-laser/30 transition-colors">
+        <div class="absolute top-3 right-3 md:top-4 md:right-4 font-display text-4xl md:text-5xl font-bold text-steel-800/50">04</div>
+        <div class="relative">
+          <div class="flex items-start gap-4 md:gap-6">
+             <div class="shrink-0 w-36">
+              <div class="font-display text-2xl md:text-3xl font-bold text-laser">0.1mm</div>
+              <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">最小字符高度</div>
+            </div>
+            <div>
+              <h3 class="font-display text-base md:text-lg font-semibold text-white mb-1 md:mb-2">微型雕刻</h3>
+              <p class="font-body text-xs md:text-sm text-steel-400">在微观尺度上实现清晰的字母数字标记</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center">
+      <h3 class="font-mono text-xs tracking-widest text-steel-400 uppercase mb-6 md:mb-8">我们的服务承诺</h3>
+      <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-3 md:gap-6">
+        <div class="px-4 md:px-8 py-3 md:py-4 bg-steel-900/50 border border-steel-700 hover:border-laser/30 transition-colors">
+          <div class="font-display text-sm md:text-lg font-semibold text-white">质量控制</div>
+          <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">100% 全检</div>
+        </div>
+        <div class="px-4 md:px-8 py-3 md:py-4 bg-steel-900/50 border border-steel-700 hover:border-laser/30 transition-colors">
+          <div class="font-display text-sm md:text-lg font-semibold text-white">60 HRC</div>
+          <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">淬硬钢加工</div>
+        </div>
+        <div class="px-4 md:px-8 py-3 md:py-4 bg-steel-900/50 border border-steel-700 hover:border-laser/30 transition-colors">
+          <div class="font-display text-sm md:text-lg font-semibold text-white">微米级精度</div>
+          <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">0.1mm 分辨率</div>
+        </div>
+        <div class="px-4 md:px-8 py-3 md:py-4 bg-steel-900/50 border border-steel-700 hover:border-laser/30 transition-colors">
+          <div class="font-display text-sm md:text-lg font-semibold text-white">保密承诺</div>
+          <div class="font-mono text-[9px] md:text-[10px] tracking-wider text-steel-500 uppercase">知识产权保护</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

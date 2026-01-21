@@ -21,14 +21,48 @@ interface Props {
   body?: string;
   /** Display style: 'button' | 'inline' */
   variant?: 'button' | 'inline';
+  /** Language: 'en' | 'zh' */
+  lang?: 'en' | 'zh';
 }
+
+const { variant = 'button', lang = 'en' } = Astro.props;
+
+// Language-specific defaults
+const defaults = {
+  en: {
+    subject: "Quote Request - [Company Name]",
+    body: "Hi L M Precision,%0D%0A%0D%0APlease provide a quote for the attached drawings.%0D%0A%0D%0AMaterial: %0D%0AQuantity: %0D%0A%0D%0AThank you,",
+  },
+  zh: {
+    subject: "报价请求 - [公司名称]",
+    body: "您好 L M Precision，%0D%0A%0D%0A请根据附件图纸提供报价。%0D%0A%0D%0A材料：%0D%0A数量：%0D%0A%0D%0A谢谢，",
+  },
+};
+
+const labels = {
+  en: {
+    email: 'Email',
+    clickToCopy: '- Click to copy',
+    loading: 'Loading...',
+    sendQuote: 'Send Quote via Email',
+    copied: 'COPIED!',
+  },
+  zh: {
+    email: '电子邮件',
+    clickToCopy: '- 点击复制',
+    loading: '加载中...',
+    sendQuote: '通过邮件发送报价请求',
+    copied: '已复制！',
+  },
+};
+
+const t = labels[lang];
 
 const {
   user = "lm.engraving",
   domain = "yahoo.com.sg",
-  subject = "Quote Request - [Company Name]",
-  body = "Hi L M Precision,%0D%0A%0D%0APlease provide a quote for the attached drawings.%0D%0A%0D%0AMaterial: %0D%0AQuantity: %0D%0A%0D%0AThank you,",
-  variant = 'button'
+  subject = defaults[lang].subject,
+  body = defaults[lang].body,
 } = Astro.props;
 
 // Multi-layer encoding: Base64 + character code array for extra obfuscation
@@ -55,12 +89,12 @@ const scrambledDomain = encodedDomain.split('').reverse().join('');
       </svg>
     </div>
     <div>
-      <div class="label-text font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors">
-        Email <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">- Click to copy</span>
+      <div class="label-text font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors" data-copied={t.copied}>
+        {t.email} <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">{t.clickToCopy}</span>
       </div>
       <!-- Email rendered via JS only - no plaintext in HTML -->
       <div class="email-display font-display text-lg text-white" aria-live="polite">
-        <span class="email-placeholder text-steel-500">Loading...</span>
+        <span class="email-placeholder text-steel-500">{t.loading}</span>
       </div>
     </div>
   </button>
@@ -81,7 +115,7 @@ const scrambledDomain = encodedDomain.split('').reverse().join('');
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
-      Send Quote via Email
+      {t.sendQuote}
     </span>
   </a>
 )}
@@ -201,7 +235,8 @@ const scrambledDomain = encodedDomain.split('').reverse().join('');
 
         if (label) {
           const originalHTML = label.innerHTML;
-          label.innerHTML = '<span class="text-emerald-500 font-bold">COPIED!</span>';
+          const copiedText = (label as HTMLElement).dataset.copied || 'COPIED!';
+          label.innerHTML = `<span class="text-emerald-500 font-bold">${copiedText}</span>`;
 
           setTimeout(() => {
             label.innerHTML = originalHTML;

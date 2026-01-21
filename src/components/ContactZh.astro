@@ -1,0 +1,116 @@
+---
+/**
+ * ContactSection.astro
+ *
+ * Updated contact section with spam-protected contact info.
+ * Uses ObfuscatedEmail and ObfuscatedPhone components to prevent bot harvesting.
+ */
+import ObfuscatedEmail from './ObfuscatedEmail.astro';
+import ObfuscatedPhone from './ObfuscatedPhone.astro';
+---
+
+<section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+  <div class="absolute top-1/2 left-0 w-1/3 h-96 bg-precision-cyan/5 blur-[100px] -translate-y-1/2 -translate-x-1/4"></div>
+  <div class="absolute bottom-0 right-1/4 w-1/3 h-64 bg-laser/5 blur-[120px] translate-y-1/4"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-stretch">
+       
+      <div class="flex flex-col h-full">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-laser"></span>
+          <span class="font-mono text-xs tracking-[0.3em] text-laser uppercase">联系我们</span>
+        </div>
+        
+        <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
+          准备好 <span class="text-laser">开始</span> 了吗？
+        </h2>
+        
+        <p class="font-body text-lg text-steel-400 mb-8 max-w-md">
+          我们专注于处理复杂需求与严苛公差。请直接联系我们进行咨询。
+        </p>
+
+        <div class="flex flex-col gap-4">
+
+          <ObfuscatedPhone lang="zh" />
+
+          <ObfuscatedEmail variant="button" lang="zh" />
+
+          <a href="https://maps.app.goo.gl/y8muUsqGeMGKWZo36" target="_blank" class="group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors">
+            <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] tracking-wider text-steel-500 uppercase">公司地址</div>
+              <div class="font-display text-lg text-white">Midview Building</div>
+              <div class="font-body text-sm text-steel-400">50 Bukit Batok Street 23, #03-27<br>Singapore 659578</div>
+            </div>
+          </a>
+
+          <div class="group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors cursor-default">
+            <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <div class="font-mono text-[10px] tracking-wider text-steel-500 uppercase">营业时间</div>
+              <div class="font-display text-lg text-white">周一至周五: 9:30am - 6:00pm</div>
+            </div>
+          </div>
+           
+        </div>
+      </div>
+
+      <div id="quote" class="h-full">
+        <div class="bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors p-8 lg:p-12 relative overflow-hidden h-full flex flex-col justify-center">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-laser/5 blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+          <h3 class="font-display text-3xl font-semibold text-white mb-6">如何索取报价</h3>
+          <p class="font-body text-steel-400 mb-8 leading-relaxed">
+            请直接将您的项目需求发送电子邮件给我们。为确保在 24 小时内获得准确报价，请包含以下内容：
+          </p>
+           
+          <div class="space-y-6 mb-10">
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-laser/10 border border-laser/30 flex items-center justify-center shrink-0 mt-1">
+                <span class="text-laser text-xs font-bold">1</span>
+              </div>
+              <div>
+                <div class="font-display text-white font-medium">技术图纸</div>
+                <p class="text-sm text-steel-500">附上 DXF、DWG、STEP 或 PDF 文件。</p>
+              </div>
+            </div>
+             
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-laser/10 border border-laser/30 flex items-center justify-center shrink-0 mt-1">
+                <span class="text-laser text-xs font-bold">2</span>
+              </div>
+              <div>
+                <div class="font-display text-white font-medium">材料与表面处理</div>
+                <p class="text-sm text-steel-500">说明材料（如 Stavax、D2）及硬度 (HRC)。</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-laser/10 border border-laser/30 flex items-center justify-center shrink-0 mt-1">
+                <span class="text-laser text-xs font-bold">3</span>
+              </div>
+              <div>
+                <div class="font-display text-white font-medium">数量与工期</div>
+                <p class="text-sm text-steel-500">预计数量与要求交付日期。</p>
+              </div>
+            </div>
+          </div>
+
+          <ObfuscatedEmail variant="inline" lang="zh" />
+           
+          <div class="mt-4 text-center">
+            <span class="font-mono text-[10px] text-steel-600 uppercase">接受的文件格式：STEP, IGES, DXF, DWG, PDF</span>
+          </div>
+
+        </div>
+      </div>
+       
+    </div>
+  </div>
+</section>

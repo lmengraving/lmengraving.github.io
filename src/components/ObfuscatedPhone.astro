@@ -14,11 +14,31 @@ interface Props {
   phone?: string;
   /** Display label */
   label?: string;
+  /** Language: 'en' | 'zh' */
+  lang?: 'en' | 'zh';
 }
+
+const labels = {
+  en: {
+    phone: 'Phone',
+    clickToCopy: '- Click to copy',
+    loading: 'Loading...',
+    copied: 'COPIED!',
+  },
+  zh: {
+    phone: '电话',
+    clickToCopy: '- 点击复制',
+    loading: '加载中...',
+    copied: '已复制！',
+  },
+};
+
+const { lang = 'en' } = Astro.props;
+const t = labels[lang];
 
 const {
   phone = "+65 6316 6009",
-  label = "Phone"
+  label = t.phone
 } = Astro.props;
 
 // Multi-layer encoding: Base64 + reverse for obfuscation
@@ -37,12 +57,12 @@ const scrambledPhone = encodedPhone.split('').reverse().join('');
     </svg>
   </div>
   <div>
-    <div class="phone-label font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors">
-      {label} <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">- Click to copy</span>
+    <div class="phone-label font-mono text-[10px] tracking-wider text-steel-500 uppercase group-hover:text-laser transition-colors" data-copied={t.copied}>
+      {label} <span class="copy-hint hidden group-hover:inline normal-case tracking-normal text-steel-600 ml-1">{t.clickToCopy}</span>
     </div>
     <!-- Phone rendered via JS only - no plaintext in HTML -->
     <div class="phone-display font-display text-lg text-white" aria-live="polite">
-      <span class="phone-placeholder text-steel-500">Loading...</span>
+      <span class="phone-placeholder text-steel-500">{t.loading}</span>
     </div>
   </div>
 </button>
@@ -138,7 +158,8 @@ const scrambledPhone = encodedPhone.split('').reverse().join('');
 
         if (label) {
           const originalHTML = label.innerHTML;
-          label.innerHTML = '<span class="text-emerald-500 font-bold">COPIED!</span>';
+          const copiedText = (label as HTMLElement).dataset.copied || 'COPIED!';
+          label.innerHTML = `<span class="text-emerald-500 font-bold">${copiedText}</span>`;
 
           setTimeout(() => {
             label.innerHTML = originalHTML;

@@ -3,23 +3,37 @@ interface Props {
   title: string;
   description?: string;
   canonicalPath?: string;
+  lang?: 'en' | 'zh';
 }
 
 const defaultDescription = "Singapore's specialist in laser mold engraving, custom marking dies, steel stamps, rolling dies, electrode engraving for EDM, and industrial laser marking. Over 40 years of precision engineering excellence.";
 
+const defaultDescriptionZh = "新加坡激光模具雕刻、定制打标模具、钢印、滚压模具、EDM电极雕刻和工业激光打标专家。超过40年精密工程经验。";
+
 const {
   title,
-  description = defaultDescription,
-  canonicalPath = ""
+  description,
+  canonicalPath = "",
+  lang = 'en'
 } = Astro.props;
+
+const finalDescription = description || (lang === 'zh' ? defaultDescriptionZh : defaultDescription);
 
 const siteUrl = "https://lmengraving.sg";
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
-const fullTitle = `${title} | L M Precision Pte Ltd`;
+const fullTitle = lang === 'zh'
+  ? `${title} | L M Precision 私人有限公司`
+  : `${title} | L M Precision Pte Ltd`;
+
+// Generate alternate language URLs for hreflang
+const enPath = canonicalPath.replace(/^\/zh/, '') || '/';
+const zhPath = canonicalPath.startsWith('/zh') ? canonicalPath : (canonicalPath === '' || canonicalPath === '/' ? '/zh/' : `/zh${canonicalPath}`);
+const enUrl = `${siteUrl}${enPath}`;
+const zhUrl = `${siteUrl}${zhPath}`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,11 +41,18 @@ const fullTitle = `${title} | L M Precision Pte Ltd`;
     <!-- Primary Meta Tags -->
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
-    <meta name="description" content={description} />
-    <meta name="keywords" content="laser engraving Singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking, CNC engraving, traceability marking, QR code marking, barcode engraving, precision engraving Singapore" />
+    <meta name="description" content={finalDescription} />
+    <meta name="keywords" content={lang === 'zh'
+      ? "激光雕刻新加坡, 模具雕刻, 定制打标模具, 钢印, 滚压模具, 3D模具雕刻, 电极雕刻, EDM电极, 工业激光打标, CNC雕刻, 追溯标记, 二维码打标, 条码雕刻, 精密雕刻新加坡"
+      : "laser engraving Singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking, CNC engraving, traceability marking, QR code marking, barcode engraving, precision engraving Singapore"} />
     <meta name="author" content="L M Precision Pte Ltd" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang Tags for SEO -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="zh" href={zhUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <!-- Geographic Meta Tags -->
     <meta name="geo.region" content="SG" />
@@ -41,15 +62,15 @@ const fullTitle = `${title} | L M Precision Pte Ltd`;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={finalDescription} />
     <meta property="og:site_name" content="L M Precision Pte Ltd" />
-    <meta property="og:locale" content="en_SG" />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_SG'} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={finalDescription} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

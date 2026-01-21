@@ -1,0 +1,50 @@
+---
+interface Props {
+  currentLang: 'en' | 'zh';
+  currentPath: string;
+}
+
+const { currentLang, currentPath } = Astro.props;
+
+// Generate the alternate language URL
+const getAlternatePath = () => {
+  if (currentLang === 'en') {
+    // English -> Chinese: add /zh prefix
+    return currentPath === '' || currentPath === '/' ? '/zh/' : `/zh${currentPath}`;
+  } else {
+    // Chinese -> English: remove /zh prefix
+    return currentPath.replace(/^\/zh/, '') || '/';
+  }
+};
+
+const alternatePath = getAlternatePath();
+const isEnglish = currentLang === 'en';
+---
+
+<div class="flex items-center gap-1 font-mono text-xs">
+  <a
+    href={isEnglish ? currentPath || '/' : alternatePath}
+    class:list={[
+      "px-2 py-1 transition-colors duration-200",
+      isEnglish
+        ? "text-white bg-steel-800"
+        : "text-steel-400 hover:text-white"
+    ]}
+    aria-current={isEnglish ? "page" : undefined}
+  >
+    EN
+  </a>
+  <span class="text-steel-600">|</span>
+  <a
+    href={isEnglish ? alternatePath : currentPath}
+    class:list={[
+      "px-2 py-1 transition-colors duration-200",
+      !isEnglish
+        ? "text-white bg-steel-800"
+        : "text-steel-400 hover:text-white"
+    ]}
+    aria-current={!isEnglish ? "page" : undefined}
+  >
+    中文
+  </a>
+</div>
