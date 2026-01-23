@@ -20,7 +20,7 @@
       <priority>1.0</priority>
    </url>
    <url>
-      <loc>https://lmengraving.sg/privacy</loc>
+      <loc>https://lmengraving.sg/privacy/</loc>
       <xhtml:link rel="alternate" hreflang="en" href="https://lmengraving.sg/privacy"/>
       <xhtml:link rel="alternate" hreflang="zh" href="https://lmengraving.sg/zh/privacy"/>
       <xhtml:link rel="alternate" hreflang="x-default" href="https://lmengraving.sg/privacy"/>
@@ -29,7 +29,7 @@
       <priority>0.3</priority>
    </url>
    <url>
-      <loc>https://lmengraving.sg/zh/privacy</loc>
+      <loc>https://lmengraving.sg/zh/privacy/</loc>
       <xhtml:link rel="alternate" hreflang="en" href="https://lmengraving.sg/privacy"/>
       <xhtml:link rel="alternate" hreflang="zh" href="https://lmengraving.sg/zh/privacy"/>
       <xhtml:link rel="alternate" hreflang="x-default" href="https://lmengraving.sg/privacy"/>
