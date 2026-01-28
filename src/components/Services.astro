@@ -9,7 +9,18 @@ const services = [
       { name: 'Impact & Press Stamps', detail: 'Heavy-duty steel stamps for metal stamping and embossing applications.' },
       { name: 'Hot Stamping Dies', detail: 'Thermally conductive brass and steel dies for packaging and decorative branding.' }
     ],
-    icon: `<path d="M12 36L24 8L36 36" stroke="currentColor" stroke-width="2"/><path d="M16 28H32" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="8" r="3" stroke="currentColor" stroke-width="2"/>`
+    icon: `<path d="M12 36L24 8L36 36" stroke="currentColor" stroke-width="2"/><path d="M16 28H32" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="8" r="3" stroke="currentColor" stroke-width="2"/>`,
+    images: [
+      // REORDERED: Roll/Round dies first to match "Rotary & Roll Dies"
+      { src: '/EmbossingDieSet.jpeg', title: 'Large Embossing Dies' },
+      // Then Impact stamps to match "Impact & Press"
+      { src: '/StampingDie.jpeg', title: 'Logo Stamping Die' },
+      { src: '/MarkingPunch.jpeg', title: 'Text Marking Punch' },
+
+      // Then Hot Stamping to match "Hot Stamping"
+      { src: '/HotStampingDie.jpeg', title: 'Brass Hot Stamping Die Set' },
+      { src: '/MarkingPunch2.jpeg', title: 'Brand Name Punch' },
+    ]
   },
   {
     number: '02',
@@ -20,7 +31,16 @@ const services = [
       { name: 'Laser Annealing', detail: 'Corrosion-resistant black marking on stainless steel and titanium (medical/aerospace).' },
       { name: 'Bar Codes, QR & UID', detail: 'Precision marking of serial numbers, bar codes, and QR codes for full product traceability.' }
     ],
-    icon: `<path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="M24 10V18M24 30V38M10 24H18M30 24H38" stroke="currentColor" stroke-width="1.5"/>`
+    icon: `<path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="M24 10V18M24 30V38M10 24H18M30 24H38" stroke="currentColor" stroke-width="1.5"/>`,
+    images: [
+      // REORDERED: Deep/Cavity work first to match "Deep Engraving"
+      { src: '/CavityID.jpeg', title: 'Cavity ID & Logo Marking' },
+      { src: '/InsertLogo.jpeg', title: 'Logo Insert Engraving' },
+      // Roller/Medical second to match "Laser Annealing (Medical)"
+      { src: '/Lasermarkingonroller.jpeg', title: 'Roller Laser Marking' },
+      // Codes last to match "Bar Codes & UID"
+      { src: '/LaserPartCode.jpeg', title: 'Production Jig Marking' }
+    ]
   },
   {
     number: '03',
@@ -31,7 +51,21 @@ const services = [
       { name: '3D Laser Engraving', detail: '5-axis laser technology for sidewalls, contours, and complex mold surface geometries.' },
       { name: '3D Graphics & Logos', detail: 'Three-dimensional shapes and logos engraved on contoured surfaces for molding applications.' }
     ],
-    icon: `<path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="currentColor" stroke-width="2"/><path d="M24 4V44M6 14L42 34M42 14L6 34" stroke="currentColor" stroke-width="1" opacity="0.5"/><circle cx="24" cy="24" r="4" fill="currentColor"/>`
+    icon: `<path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="currentColor" stroke-width="2"/><path d="M24 4V44M6 14L42 34M42 14L6 34" stroke="currentColor" stroke-width="1" opacity="0.5"/><circle cx="24" cy="24" r="4" fill="currentColor"/>`,
+    images: [
+      // REORDERED: Physical Mold/Cavity first to match "CNC Machining"
+
+      { src: '/CavityInsert.jpeg', title: '3D Cavity Insert' },
+      { src: '/CavityInsert3D.jpeg', title: '3D Cavity Insert' },
+      // Curved Laser Work second to match "3D Laser Engraving"
+      { src: '/Electrode3DProfileSymbol.jpeg', title: '3D Curved Surface Engraving' },
+      { src: '/Engraving3DProfile.jpeg', title: '3D Profile Core Pin' },
+      // Graphics/Dots last to match "3D Graphics"
+      { src: '/Electrode3DDot.jpeg', title: '3D Dot Pattern Electrode' },
+      { src: '/LaserEngraving.jpeg', title: 'Laser Engraved Part Marking' },
+      { src: '/3dcnc.jpeg', title: '3D Mold Cavity Machining' },
+      { src: '/CNC.jpeg', title: 'CNC Logo Engraving' },
+    ]
   },
   {
     number: '04',
@@ -42,7 +76,17 @@ const services = [
       { name: 'Cavity Numbering', detail: 'Deep engraving of cavity numbers and revision levels for clear identification.' },
       { name: 'Component Marking', detail: 'Engraving matching IDs on inserts, sliders, and lifters to assist in assembly and maintenance.' }
     ],
-    icon: `<rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="2"/><path d="M8 16H40M8 24H40M8 32H40" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><rect x="12" y="12" width="8" height="8" fill="currentColor"/><rect x="28" y="12" width="8" height="8" fill="currentColor"/>`
+    icon: `<rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="2"/><path d="M8 16H40M8 24H40M8 32H40" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><rect x="12" y="12" width="8" height="8" fill="currentColor"/><rect x="28" y="12" width="8" height="8" fill="currentColor"/>`,
+    images: [
+      // REORDERED: Logos first
+      { src: '/Logo3DProfile.jpeg', title: '3D Profile with Part ID' },
+      // Component/Insert marking last
+      { src: '/CavityInsert3DProfile.jpeg', title: '3D Profile Cavity Insert' },
+      { src: '/RevisionID&Logo.jpeg', title: 'Revision ID & Brand Logo' },
+      // Cavity/Profile numbering second
+
+      { src: '/Icon_Logo&PartCode.jpeg', title: 'Revision ID & Brand Logo' }
+    ]
   },
   {
     number: '05',
@@ -53,7 +97,19 @@ const services = [
       { name: 'Copper Electrodes', detail: 'Engraving copper and copper-impregnated electrodes with fine detail for complex cavities.' },
       { name: 'Over-burn Control', detail: 'Raised or sunk characters with any desired over-burn specification.' }
     ],
-    icon: `<circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/><path d="M24 12V36" stroke="currentColor" stroke-width="2"/><path d="M16 20L24 12L32 20" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="currentColor"/>`
+    icon: `<circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/><path d="M24 12V36" stroke="currentColor" stroke-width="2"/><path d="M16 20L24 12L32 20" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="currentColor"/>`,
+    images: [
+      // REORDERED: General Brand/Graphite-style first
+      { src: '/ElectrodeLogo3D.jpeg', title: '3D Logo Electrodes' },
+
+      // Copper explicitly second to match "Copper Electrodes"
+      { src: '/ElectrodeEmbossingSymbol.jpeg', title: '3D Contour Electrode' },
+      { src: '/ElectrodeLogoCopper.jpeg', title: 'Medical Device Electrode' },
+      // Complex/Overburn last to match "Over-burn/Detail"
+      { src: '/ElectrodeLong.jpeg', title: 'Brand Logo Electrode' },
+      { src: '/Electrode_Emboss_Year_Code.jpeg', title: 'Year Code Electrodes' },
+      { src: '/ElectrodeLogo.jpeg', title: 'Icon Electrode Engraving' }
+    ]
   }
 ];
 ---
@@ -98,7 +154,7 @@ const services = [
           </button>
           <div class="service-content hidden px-4 pb-4">
             <p class="font-body text-steel-400 text-sm mb-4">{service.description}</p>
-            <div class="space-y-2">
+            <div class="space-y-2 mb-4">
               {service.capabilities.map((cap) => (
                 <div class="flex items-start gap-2 text-sm">
                   <span class="w-1.5 h-1.5 bg-laser rounded-full mt-1.5 shrink-0"></span>
@@ -106,6 +162,33 @@ const services = [
                 </div>
               ))}
             </div>
+            {service.images && service.images.length > 0 && (
+              <div class="pt-4 border-t border-steel-800">
+                <h4 class="font-mono text-[9px] tracking-widest text-steel-500 uppercase mb-3">Examples</h4>
+                <div class="grid grid-cols-2 gap-2">
+                  {service.images.map((image: { src: string; title: string }) => (
+                    <button
+                      class="relative overflow-hidden bg-steel-950 border border-steel-700 lightbox-trigger text-left"
+                      data-src={image.src}
+                      data-title={image.title}
+                      type="button"
+                    >
+                      <div class="aspect-[4/3]">
+                        <img
+                          src={image.src}
+                          alt={image.title}
+                          class="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="p-2 border-t border-steel-800">
+                        <span class="font-body text-[10px] text-steel-400 line-clamp-1">{image.title}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ))}
@@ -139,13 +222,104 @@ const services = [
               </div>
             </div>
           </div>
+
+          {/* Image showcase row - only for services with images */}
+          {service.images && service.images.length > 0 && (
+            <div class="mt-8 pt-8 border-t border-steel-800">
+              <div class="flex items-center justify-between mb-5">
+                <h4 class="font-mono text-[10px] tracking-widest text-steel-500 uppercase">Project Examples</h4>
+                {/* Carousel navigation - only show if more than 4 images */}
+                {service.images.length > 4 && (
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="carousel-prev w-8 h-8 flex items-center justify-center border border-steel-700 hover:border-laser/50 hover:bg-steel-800 transition-all text-steel-400 hover:text-white"
+                      type="button"
+                      aria-label="Previous images"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <span class="carousel-counter font-mono text-xs text-steel-500 min-w-[3rem] text-center">1 / 2</span>
+                    <button
+                      class="carousel-next w-8 h-8 flex items-center justify-center border border-steel-700 hover:border-laser/50 hover:bg-steel-800 transition-all text-steel-400 hover:text-white"
+                      type="button"
+                      aria-label="Next images"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div class="image-carousel relative overflow-hidden" data-total={service.images.length}>
+                <div class="carousel-track flex transition-transform duration-300 ease-out" style="gap: 1rem;">
+                  {service.images.map((image: { src: string; title: string }) => (
+                    <button
+                      class="group/img relative overflow-hidden bg-steel-950 border border-steel-800 hover:border-laser/50 transition-all duration-300 cursor-pointer lightbox-trigger text-left flex-shrink-0"
+                      style="width: calc(25% - 0.75rem);"
+                      data-src={image.src}
+                      data-title={image.title}
+                      type="button"
+                    >
+                      <div class="aspect-[4/3] overflow-hidden">
+                        <img
+                          src={image.src}
+                          alt={image.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="absolute inset-0 bg-gradient-to-t from-steel-950 via-steel-950/40 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-3">
+                        <span class="text-white/90 text-xs font-mono tracking-wider flex items-center gap-2">
+                          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                          </svg>
+                          View
+                        </span>
+                      </div>
+                      <div class="p-3 border-t border-steel-800">
+                        <span class="font-body text-xs text-steel-300 group-hover/img:text-white transition-colors">{image.title}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
   </div>
 </section>
 
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-steel-950/95 backdrop-blur-sm">
+  <button id="lightbox-close" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10" type="button">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <button id="lightbox-prev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2" type="button">
+    <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-2" type="button">
+    <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+  <div class="max-w-5xl max-h-[85vh] mx-4 md:mx-8 flex flex-col items-center">
+    <img id="lightbox-img" src="" alt="Full size image" class="max-w-full max-h-[75vh] object-contain border border-steel-700 shadow-2xl" />
+    <div id="lightbox-title" class="mt-4 font-display text-lg text-white text-center"></div>
+  </div>
+  <div id="lightbox-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-steel-400"></div>
+</div>
+
 <script>
+  // Accordion functionality
   const accordions = document.querySelectorAll('.service-accordion');
 
   accordions.forEach(accordion => {
@@ -170,5 +344,161 @@ const services = [
       content?.classList.toggle('hidden');
       chevron?.classList.toggle('rotate-180');
     });
+  });
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+
+  interface ImageData {
+    src: string;
+    title: string;
+  }
+
+  let currentImages: ImageData[] = [];
+  let currentIndex = 0;
+
+  function openLightbox(src: string, images: ImageData[]) {
+    currentImages = images;
+    currentIndex = images.findIndex(img => img.src === src);
+    if (currentIndex === -1) currentIndex = 0;
+    updateLightboxImage();
+    lightbox?.classList.remove('hidden');
+    lightbox?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.add('hidden');
+    lightbox?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightboxImage() {
+    const current = currentImages[currentIndex];
+    if (lightboxImg && current) {
+      lightboxImg.src = current.src;
+      lightboxImg.alt = current.title;
+    }
+    if (lightboxTitle && current) {
+      lightboxTitle.textContent = current.title;
+    }
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+    }
+    // Hide nav buttons if only one image
+    if (currentImages.length <= 1) {
+      lightboxPrev?.classList.add('hidden');
+      lightboxNext?.classList.add('hidden');
+      lightboxCounter?.classList.add('hidden');
+    } else {
+      lightboxPrev?.classList.remove('hidden');
+      lightboxNext?.classList.remove('hidden');
+      lightboxCounter?.classList.remove('hidden');
+    }
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightboxImage();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxImage();
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const src = trigger.getAttribute('data-src');
+      const title = trigger.getAttribute('data-title') || '';
+      // Find sibling images in the same container (carousel-track or grid)
+      const container = trigger.closest('.carousel-track') || trigger.closest('.grid');
+      const siblingTriggers = container?.querySelectorAll('.lightbox-trigger');
+      const images: ImageData[] = [];
+      siblingTriggers?.forEach(t => {
+        const imgSrc = t.getAttribute('data-src');
+        const imgTitle = t.getAttribute('data-title') || '';
+        if (imgSrc) images.push({ src: imgSrc, title: imgTitle });
+      });
+      if (src) openLightbox(src, images);
+    });
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxPrev?.addEventListener('click', prevImage);
+  lightboxNext?.addEventListener('click', nextImage);
+
+  // Close on background click
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  // Image carousel functionality
+  const carousels = document.querySelectorAll('.image-carousel');
+
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track') as HTMLElement;
+    const container = carousel.closest('.border-t');
+    const prevBtn = container?.querySelector('.carousel-prev');
+    const nextBtn = container?.querySelector('.carousel-next');
+    const counter = container?.querySelector('.carousel-counter');
+    const totalImages = parseInt(carousel.getAttribute('data-total') || '0');
+
+    if (totalImages <= 4) return; // No carousel needed
+
+    let currentPage = 0;
+    const imagesPerPage = 4;
+    const totalPages = Math.ceil(totalImages / imagesPerPage);
+
+    function updateCarousel() {
+      if (!track) return;
+      // Calculate offset: each image is 25% width with gap
+      const slideWidth = track.scrollWidth / totalImages;
+      const offset = currentPage * imagesPerPage * slideWidth;
+      track.style.transform = `translateX(-${offset}px)`;
+
+      // Update counter
+      if (counter) {
+        counter.textContent = `${currentPage + 1} / ${totalPages}`;
+      }
+
+      // Update button states
+      prevBtn?.classList.toggle('opacity-30', currentPage === 0);
+      prevBtn?.classList.toggle('pointer-events-none', currentPage === 0);
+      nextBtn?.classList.toggle('opacity-30', currentPage === totalPages - 1);
+      nextBtn?.classList.toggle('pointer-events-none', currentPage === totalPages - 1);
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        updateCarousel();
+      }
+    });
+
+    // Initialize
+    updateCarousel();
   });
 </script>
