@@ -6,7 +6,7 @@ interface Props {
   lang?: 'en' | 'zh';
 }
 
-const defaultDescription = "Singapore's specialist in laser mold engraving, custom marking dies, steel stamps, rolling dies, electrode engraving for EDM, and industrial laser marking. Over 40 years of precision engineering excellence.";
+const defaultDescription = "Singapore's leading precision engraving specialist since 1984. Expert laser mold engraving, custom marking dies, steel stamps, EDM electrode engraving & industrial laser marking services in SG. ISO-quality precision engineering.";
 
 const defaultDescriptionZh = "新加坡激光模具雕刻、定制打标模具、钢印、滚压模具、EDM电极雕刻和工业激光打标专家。超过40年精密工程经验。";
 
@@ -44,7 +44,7 @@ const zhUrl = `${siteUrl}${zhPath}`;
     <meta name="description" content={finalDescription} />
     <meta name="keywords" content={lang === 'zh'
       ? "激光雕刻新加坡, 模具雕刻, 定制打标模具, 钢印, 滚压模具, 3D模具雕刻, 电极雕刻, EDM电极, 工业激光打标, CNC雕刻, 追溯标记, 二维码打标, 条码雕刻, 精密雕刻新加坡"
-      : "laser engraving Singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking, CNC engraving, traceability marking, QR code marking, barcode engraving, precision engraving Singapore"} />
+      : "engraving sg, precision engraving singapore, laser engraving singapore, engraving services singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking singapore, CNC engraving, traceability marking, QR code marking, barcode engraving"} />
     <meta name="author" content="L M Precision Pte Ltd" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
@@ -65,12 +65,17 @@ const zhUrl = `${siteUrl}${zhPath}`;
     <meta property="og:description" content={finalDescription} />
     <meta property="og:site_name" content="L M Precision Pte Ltd" />
     <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_SG'} />
+    <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="L M Precision - Precision Engraving Singapore" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={finalDescription} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -92,11 +97,14 @@ const zhUrl = `${siteUrl}${zhPath}`;
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
+        "@id": "https://lmengraving.sg/#organization",
         "name": "L M Precision Pte Ltd",
-        "description": "Singapore's specialist in laser mold engraving, custom marking dies, and industrial laser marking services with over 40 years of experience.",
+        "alternateName": ["LM Precision", "LM Engraving Singapore"],
+        "description": "Singapore's leading precision engraving specialist since 1984. Expert laser mold engraving, custom marking dies, steel stamps, EDM electrode engraving and industrial laser marking services.",
         "url": "https://lmengraving.sg",
         "telephone": "+65 6316 6009",
         "email": "lm.precision@yahoo.com.sg",
+        "image": "https://lmengraving.sg/logo.svg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "50 Bukit Batok Street 23, #03-27 Midview Building",
@@ -109,14 +117,76 @@ const zhUrl = `${siteUrl}${zhPath}`;
           "latitude": "1.3494",
           "longitude": "103.7545"
         },
-        "openingHours": "Mo-Fr 09:00-18:00",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
         "priceRange": "$$",
         "areaServed": {
           "@type": "Country",
           "name": "Singapore"
         },
-        "serviceType": ["Laser Engraving", "Mold Engraving", "Custom Marking Dies", "Industrial Laser Marking", "Electrode Engraving"],
-        "foundingDate": "1984"
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Precision Engraving Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Laser Engraving Singapore",
+                "description": "Precision laser engraving services for industrial applications"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mold Engraving",
+                "description": "3D mold engraving and texturing for injection molds"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Marking Dies",
+                "description": "Steel stamps, rolling dies, and hot stamping dies"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "EDM Electrode Engraving",
+                "description": "Precision engraving on graphite and copper electrodes"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Industrial Laser Marking",
+                "description": "Permanent marking, barcodes, QR codes for traceability"
+              }
+            }
+          ]
+        },
+        "foundingDate": "1984",
+        "sameAs": []
+      }
+    </script>
+
+    <!-- Structured Data - WebSite for Search Box -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "L M Precision - Precision Engraving Singapore",
+        "url": "https://lmengraving.sg",
+        "description": "Singapore's leading precision engraving and industrial laser marking specialist since 1984"
       }
     </script>
   </head>

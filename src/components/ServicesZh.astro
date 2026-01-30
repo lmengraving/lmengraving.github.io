@@ -18,7 +18,8 @@ const services = [
       { src: '/MarkingPunch.jpeg', title: '文字打标冲头' },
       // 烫金模具，匹配"烫金模具"
       { src: '/HotStampingDie.jpeg', title: '黄铜烫金模具套装' },
-      { src: '/MarkingPunch2.jpeg', title: '品牌名称冲头' }
+      { src: '/hardened-steel-marking-dies.jpeg', title: '热处理定制钢制打标模具' },
+      { src: '/MarkingPunch2.jpeg', title: '品牌名称冲头' },
     ]
   },
   {
@@ -33,12 +34,16 @@ const services = [
     icon: `<path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="M24 10V18M24 30V38M10 24H18M30 24H38" stroke="currentColor" stroke-width="1.5"/>`,
     images: [
       // 深度/型腔优先，匹配"深度雕刻"
-      { src: '/CavityID.jpeg', title: '型腔 ID 与标志打标' },
+      { src: '/laser-engraved-mold-cavity.jpeg', title: '注塑模具精密激光纹理加工' },
+      { src: '/high-precision-edm-electrode-text.jpeg', title: '塑胶模具精密激光纹理加工' },
       { src: '/InsertLogo.jpeg', title: '标志镶件雕刻' },
       // 滚轮/医疗，匹配"激光退火（医疗）"
       { src: '/Lasermarkingonroller.jpeg', title: '滚轮激光打标' },
       // 代码最后，匹配"条形码与 UID"
-      { src: '/LaserPartCode.jpeg', title: '生产治具打标' }
+      { src: '/CavityID.jpeg', title: '型腔 ID 与标志' },
+      { src: '/LaserPartCode.jpeg', title: '生产治具打标' },
+      { src: '/rotary-laser-marking-anodized-aluminum.jpeg', title: '圆柱面旋转激光打标' },
+      { src: '/laser-etched-graduations-stainless-steel.jpeg', title: '测量刻度精密激光蚀刻' },
     ]
   },
   {
@@ -53,16 +58,16 @@ const services = [
     icon: `<path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" stroke="currentColor" stroke-width="2"/><path d="M24 4V44M6 14L42 34M42 14L6 34" stroke="currentColor" stroke-width="1" opacity="0.5"/><circle cx="24" cy="24" r="4" fill="currentColor"/>`,
     images: [
       // 物理模具/型腔优先，匹配"CNC 加工"
-      { src: '/CavityInsert.jpeg', title: '3D 型腔镶件' },
+      { src: '/Logo3DProfile.jpeg', title: '3D 轮廓与零件 ID' },
+      // 组件/镶件打标
+      { src: '/CavityInsert3DProfile.jpeg', title: '3D 轮廓型腔镶件' },
       { src: '/CavityInsert3D.jpeg', title: '3D 型腔镶件' },
       // 曲面激光，匹配"3D 激光雕刻"
       { src: '/Electrode3DProfileSymbol.jpeg', title: '3D 曲面雕刻' },
       { src: '/Engraving3DProfile.jpeg', title: '3D 轮廓芯针' },
       // 图形/点阵，匹配"3D 图形"
       { src: '/Electrode3DDot.jpeg', title: '3D 点阵图案电极' },
-      { src: '/LaserEngraving.jpeg', title: '激光雕刻零件标记' },
-      { src: '/3dcnc.jpeg', title: '3D 模具型腔加工' },
-      { src: '/CNC.jpeg', title: 'CNC 标志雕刻' }
+      { src: '/polished-mold-cores-consumer-goods.jpeg', title: '高抛光模具标志' },
     ]
   },
   {
@@ -77,12 +82,14 @@ const services = [
     icon: `<rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="2"/><path d="M8 16H40M8 24H40M8 32H40" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><rect x="12" y="12" width="8" height="8" fill="currentColor"/><rect x="28" y="12" width="8" height="8" fill="currentColor"/>`,
     images: [
       // Logo 优先
-      { src: '/Logo3DProfile.jpeg', title: '3D 轮廓与零件 ID' },
-      // 组件/镶件打标
-      { src: '/CavityInsert3DProfile.jpeg', title: '3D 轮廓型腔镶件' },
+      { src: '/CavityInsert.jpeg', title: '零件 ID 雕刻' },
       { src: '/RevisionID&Logo.jpeg', title: '版本 ID 与品牌标志' },
       // 型腔/轮廓编号
-      { src: '/Icon_Logo&PartCode.jpeg', title: '版本 ID 与品牌标志' }
+      { src: '/cnc-engraved-regulatory-markings.jpeg', title: '法规合规标准 CNC 雕刻' },
+      { src: '/Icon_Logo&PartCode.jpeg', title: '版本 ID 与品牌标志' },
+      { src: '/LaserEngraving.jpeg', title: '激光雕刻零件标记' },
+      { src: '/CNC.jpeg', title: 'CNC 标志雕刻' },
+      { src: '/3dcnc.jpeg', title: '3D 模具型腔加工' },
     ]
   },
   {
@@ -102,9 +109,11 @@ const services = [
       { src: '/ElectrodeEmbossingSymbol.jpeg', title: '3D 轮廓电极' },
       { src: '/ElectrodeLogoCopper.jpeg', title: '医疗器械电极' },
       // 复杂/火花位，匹配"火花位/细节"
-      { src: '/ElectrodeLong.jpeg', title: '品牌标志电极' },
+      { src: '/ElectrodeLong.jpeg', title: '精密凸字标志' },
+      { src: '/copper-edm-electrode-regulatory-symbols.jpeg', title: '图标定制铜 EDM 电极' },
+      { src: '/copper-edm-electrode-branding.jpeg', title: '精密凸字标志' },
       { src: '/Electrode_Emboss_Year_Code.jpeg', title: '年份代码电极' },
-      { src: '/ElectrodeLogo.jpeg', title: '图标电极雕刻' }
+      { src: '/ElectrodeLogo.jpeg', title: '图标电极雕刻' },
     ]
   }
 ];
