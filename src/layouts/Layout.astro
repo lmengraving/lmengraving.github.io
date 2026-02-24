@@ -18,18 +18,15 @@ const {
 } = Astro.props;
 
 const finalDescription = description || (lang === 'zh' ? defaultDescriptionZh : defaultDescription);
-
 const siteUrl = "https://lmengraving.sg";
-const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const cleanPath = canonicalPath.replace(/^\/+/, '').replace(/\/+$/, '');
+const basePath = cleanPath.startsWith('zh/') ? cleanPath.replace(/^zh\//, '') : (cleanPath === 'zh' ? '' : cleanPath);
+const canonicalUrl = cleanPath ? `${siteUrl}/${cleanPath}/` : `${siteUrl}/`;
+const enUrl = basePath ? `${siteUrl}/${basePath}/` : `${siteUrl}/`;
+const zhUrl = basePath ? `${siteUrl}/zh/${basePath}/` : `${siteUrl}/zh/`;
 const fullTitle = lang === 'zh'
   ? `${title} | L M Precision 私人有限公司`
   : `${title} | L M Precision Pte Ltd`;
-
-// Generate alternate language URLs for hreflang
-const enPath = canonicalPath.replace(/^\/zh/, '') || '/';
-const zhPath = canonicalPath.startsWith('/zh') ? canonicalPath : (canonicalPath === '' || canonicalPath === '/' ? '/zh/' : `/zh${canonicalPath}`);
-const enUrl = `${siteUrl}${enPath}`;
-const zhUrl = `${siteUrl}${zhPath}`;
 ---
 
 <!doctype html>
