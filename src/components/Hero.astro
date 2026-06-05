@@ -1,80 +1,124 @@
-<section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-[15%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-laser/50 to-transparent animate-scan-line"></div>
-    
-    <div class="absolute top-[75%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-precision-cyan/30 to-transparent animate-scan-line" style="animation-delay: -1.5s;"></div>
-    
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-laser/10 rounded-full blur-[100px] animate-pulse-glow"></div>
-    <div class="hidden md:block absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-laser/30"></div>
-    <div class="hidden md:block absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-laser/30"></div>
-    <div class="hidden md:block absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-laser/30"></div>
-    <div class="hidden md:block absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-laser/30"></div>
-  </div>
+---
+/**
+ * Hero.astro — "Spec Sheet" redesign
+ *
+ * Two-column hero: headline + stat readout on the left, an annotated
+ * "engineering drawing" photo plate on the right (corner ticks, tolerance
+ * tags, FIG.01 callout, meta row). Uses the existing steel/laser tokens,
+ * Oswald/Barlow/JetBrains Mono, and the project's animate-fade-up entrance.
+ *
+ * Image: /public/laser-engraved-mold-cavity.jpeg (already in the repo).
+ */
+interface Props {
+  lang?: 'en' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-    <div class="inline-flex items-center gap-3 mb-8 opacity-0 animate-fade-up">
-      <span class="w-12 h-[1px] bg-laser"></span>
-      <span class="font-mono text-xs tracking-[0.4em] text-laser uppercase">Since 1984 • Singapore</span>
-      <span class="w-12 h-[1px] bg-laser"></span>
-    </div>
+const t = {
+  en: {
+    eyebrow: 'Since 1984 · Singapore',
+    title1: 'Precision engraving,',
+    title2: 'down to the',
+    titleAccent: 'last micron.',
+    sub: "Four decades of laser mold engraving, marking dies, EDM electrodes and 3D surfacing — built to ±0.05\u00A0mm for the world's most demanding tooling.",
+    ctaQuote: 'Request a Quote',
+    ctaServices: 'View Capabilities',
+    stats: [
+      { v: '40', u: '+', k: 'Years' },
+      { v: '±0.05', u: 'mm', k: 'Tolerance' },
+      { v: '5', u: '-Axis', k: 'Laser' },
+      { v: '100', u: '%', k: 'Inspected' },
+    ],
+    fig: 'FIG.01 — MOLD CAVITY / 2083 ESR · 50–52 HRC',
+    tol: 'TOL ±0.05mm',
+    axis: '5-AXIS LASER',
+  },
+  zh: {
+    eyebrow: '始于 1984 · 新加坡',
+    title1: '精密雕刻，',
+    title2: '精确至',
+    titleAccent: '微米级。',
+    sub: '四十年激光模具雕刻、打标模具、EDM 电极及 3D 曲面雕刻经验 —— 公差控制在 ±0.05\u00A0毫米，满足最严苛的模具需求。',
+    ctaQuote: '获取报价',
+    ctaServices: '查看能力',
+    stats: [
+      { v: '40', u: '+', k: '年经验' },
+      { v: '±0.05', u: 'mm', k: '公差' },
+      { v: '5', u: '轴', k: '激光' },
+      { v: '100', u: '%', k: '检验' },
+    ],
+    fig: 'FIG.01 — 模腔 / 2083 ESR · 50–52 HRC',
+    tol: '公差 ±0.05mm',
+    axis: '五轴激光',
+  },
+}[lang];
+---
 
-    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 opacity-0 animate-fade-up delay-100">
-      <span class="text-white">L M PRECISION</span>
-      <br />
-      <span class="relative">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-laser via-laser-glow to-laser">PTE LTD</span>
-        <span class="absolute -inset-x-4 -inset-y-2 bg-laser/5 blur-2xl -z-10"></span>
-      </span>
-      <span class="sr-only"> - Precision Engraving Singapore</span>
-    </h1>
+<section class="relative min-h-screen flex items-center pt-32 lg:pt-36 pb-16 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-    <p class="font-body text-lg md:text-xl text-steel-300 max-w-3xl mx-auto mb-12 leading-relaxed opacity-0 animate-fade-up delay-200">
-      Pioneering laser mold engraving in Singapore with over <strong>40 years of experience</strong>. 
-      We deliver custom marking dies, 3D mold engraving, and permanent traceability systems (Bar Codes & QR) with precision.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-up delay-300">
-      <a href="#services" class="group relative px-8 py-4 bg-laser text-white font-display text-sm tracking-widest uppercase overflow-hidden">
-        <span class="relative z-10 flex items-center gap-3">
-          Our Services
-          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
-        <span class="absolute inset-0 bg-gradient-to-r from-laser-glow to-laser opacity-0 group-hover:opacity-100 transition-opacity"></span>
-      </a>
-      <a href="#contact" class="group px-8 py-4 border border-steel-600 text-steel-200 font-display text-sm tracking-widest uppercase hover:border-laser hover:text-white transition-all duration-300">
-        <span class="flex items-center gap-3">
-          Request Quote
-          <span class="w-2 h-2 bg-precision-green rounded-full animate-pulse"></span>
-        </span>
-      </a>
-    </div>
-
-    <div class="mt-16 md:mt-20 pt-10 md:pt-12 border-t border-steel-800/50 opacity-0 animate-fade-up delay-400">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
-        <div class="text-center">
-          <div class="font-display text-3xl md:text-5xl font-bold text-white mb-2">40<span class="text-laser">+</span></div>
-          <div class="font-mono text-[10px] md:text-xs tracking-wider text-steel-400 uppercase">Years Experience</div>
+      <!-- Left: headline + readout -->
+      <div>
+        <div class="inline-flex items-center gap-3 mb-6 opacity-0 animate-fade-up">
+          <span class="w-12 h-[1px] bg-laser"></span>
+          <span class="font-mono text-xs tracking-[0.28em] text-laser uppercase">{t.eyebrow}</span>
         </div>
-        <div class="text-center">
-          <div class="font-display text-3xl md:text-5xl font-bold text-white mb-2">0.02<span class="text-laser">mm</span></div>
-          <div class="font-mono text-[10px] md:text-xs tracking-wider text-steel-400 uppercase">Micro Precision</div>
+
+        <h1 class="font-display font-bold text-white text-5xl md:text-6xl lg:text-7xl leading-[0.98] tracking-tight mb-6 opacity-0 animate-fade-up delay-100">
+          {t.title1}<br />{t.title2} <span class="text-laser">{t.titleAccent}</span>
+        </h1>
+
+        <p class="font-body text-lg text-steel-300 max-w-xl mb-9 leading-relaxed opacity-0 animate-fade-up delay-200">
+          {t.sub}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-10 opacity-0 animate-fade-up delay-300">
+          <a href="#quote" class="group inline-flex items-center justify-center gap-3 px-7 py-4 bg-laser text-white font-mono text-xs tracking-[0.16em] uppercase hover:bg-laser-glow transition-colors">
+            {t.ctaQuote}
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="#capabilities" class="inline-flex items-center justify-center gap-3 px-7 py-4 border border-steel-600 text-steel-200 font-mono text-xs tracking-[0.16em] uppercase hover:border-laser hover:text-white transition-colors">
+            {t.ctaServices}
+          </a>
         </div>
-        <div class="hidden md:block text-center">
-          <div class="font-display text-5xl font-bold text-white mb-2">5<span class="text-laser">-Axis</span></div>
-          <div class="font-mono text-xs tracking-wider text-steel-400 uppercase">Laser Technology</div>
-        </div>
-        <div class="hidden md:block text-center">
-          <div class="font-display text-5xl font-bold text-white mb-2">3D<span class="text-laser">Engrave</span></div>
-          <div class="font-mono text-xs tracking-wider text-steel-400 uppercase">Mold Contours</div>
+
+        <!-- Stat readout table -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-steel-800 border border-steel-800 opacity-0 animate-fade-up delay-400">
+          {t.stats.map((s) => (
+            <div class="bg-steel-950 px-4 py-4">
+              <div class="font-display font-bold text-white text-2xl lg:text-3xl leading-none">{s.v}<span class="text-laser">{s.u}</span></div>
+              <div class="font-mono text-[9.5px] tracking-[0.12em] text-steel-500 uppercase mt-1.5">{s.k}</div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-up delay-500">
-    <span class="font-mono text-[10px] tracking-widest text-steel-500 uppercase">Scroll</span>
-    <div class="w-[1px] h-12 bg-gradient-to-b from-laser to-transparent"></div>
+      <!-- Right: annotated photo plate -->
+      <div class="relative border border-steel-700 bg-steel-900/40 p-3.5 opacity-0 animate-fade-up delay-200">
+        <!-- top-left annotation -->
+        <div class="absolute -left-px -top-px z-[4] font-mono text-[10px] text-precision-cyan bg-steel-950 border border-steel-700 px-2 py-1">{t.fig}</div>
+
+        <div class="relative overflow-hidden bg-black aspect-square">
+          <span class="absolute top-1.5 left-1.5 w-[18px] h-[18px] border-l-[1.5px] border-t-[1.5px] border-laser z-[3]"></span>
+          <span class="absolute top-1.5 right-1.5 w-[18px] h-[18px] border-r-[1.5px] border-t-[1.5px] border-laser z-[3]"></span>
+          <span class="absolute bottom-1.5 left-1.5 w-[18px] h-[18px] border-l-[1.5px] border-b-[1.5px] border-laser z-[3]"></span>
+          <span class="absolute bottom-1.5 right-1.5 w-[18px] h-[18px] border-r-[1.5px] border-b-[1.5px] border-laser z-[3]"></span>
+          <img src="/laser-engraved-mold-cavity.jpeg" alt="Laser-engraved injection mold cavity" class="w-full h-full object-cover" loading="eager" />
+        </div>
+
+        <!-- floating tags -->
+        <span class="absolute top-[30px] right-0 z-[4] font-mono text-[10px] text-steel-300 bg-steel-950 border border-steel-700 px-2.5 py-1.5"><span class="text-laser">◇</span> {t.tol}</span>
+        <span class="absolute bottom-[30px] left-0 z-[4] font-mono text-[10px] text-steel-300 bg-steel-950 border border-steel-700 px-2.5 py-1.5"><span class="text-laser">◇</span> {t.axis}</span>
+
+        <!-- meta row -->
+        <div class="flex justify-between items-center mt-3 font-mono text-[10px] tracking-wider text-steel-500">
+          <span>SRC <span class="text-steel-300">/cavity-101</span></span>
+          <span>SCALE 1:1</span>
+          <span class="text-steel-300">L M PRECISION</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>

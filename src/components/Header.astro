@@ -16,7 +16,6 @@ const labels = {
   en: {
     services: 'Services',
     capabilities: 'Capabilities',
-    precision: 'Precision',
     contact: 'Contact',
     home: 'Home',
     getQuote: 'Get Quote',
@@ -24,11 +23,14 @@ const labels = {
     navigation: 'Navigation',
     precisionEngraving: 'Precision Engraving',
     singapore: 'Singapore',
+    // Utility bar
+    company: 'L M Precision Pte Ltd',
+    location: 'Bukit Batok, Singapore',
+    hours: 'Mon–Fri · 09:30–18:00',
   },
   zh: {
     services: '服务',
     capabilities: '能力',
-    precision: '精密',
     contact: '联系',
     home: '首页',
     getQuote: '获取报价',
@@ -36,6 +38,10 @@ const labels = {
     navigation: '导航',
     precisionEngraving: '精密雕刻',
     singapore: '新加坡',
+    // Utility bar
+    company: 'L M Precision 私人有限公司',
+    location: '武吉巴督，新加坡',
+    hours: '周一至周五 · 09:30–18:00',
   },
 };
 
@@ -45,7 +51,6 @@ const t = labels[lang];
 const navLinks = [
   { href: `${basePath}/#services`, label: t.services },
   { href: `${basePath}/#capabilities`, label: t.capabilities },
-  { href: `${basePath}/#precision`, label: t.precision },
   { href: `${basePath}/#contact`, label: t.contact },
 ];
 
@@ -54,7 +59,6 @@ const mobileNavLinks = [
   { href: `${basePath}/`, label: t.home },
   { href: `${basePath}/#services`, label: t.services },
   { href: `${basePath}/#capabilities`, label: t.capabilities },
-  { href: `${basePath}/#precision`, label: t.precision },
   { href: `${basePath}/#contact`, label: t.contact },
   { href: `${basePath}/#quote`, label: t.getQuote },
   { href: `${basePath}/privacy`, label: t.privacy },
@@ -62,6 +66,24 @@ const mobileNavLinks = [
 ---
 
 <header class="fixed top-0 left-0 right-0 z-40 bg-steel-950/80 backdrop-blur-md border-b border-steel-800/50">
+
+  <!-- Spec-sheet utility bar -->
+  <div class="border-b border-steel-800/50 hidden sm:block">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-8 font-mono text-[10px] tracking-[0.12em] text-steel-500">
+        <div class="flex items-center gap-5 whitespace-nowrap overflow-hidden">
+          <span class="text-steel-300">{t.company}</span>
+          <span class="hidden md:inline">UEN 201100206C</span>
+          <span class="hidden lg:inline">{t.location}</span>
+        </div>
+        <div class="flex items-center gap-4 whitespace-nowrap">
+          <span class="hidden md:inline">{t.hours}</span>
+          <a href="tel:+6563166009" class="hover:text-laser transition-colors">+65 6316 6009</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <nav class="flex items-center justify-between h-20">
 
@@ -96,7 +118,7 @@ const mobileNavLinks = [
         <!-- Desktop: Show full company info -->
         <div class="hidden sm:flex flex-col justify-center border-l border-steel-700 pl-4 h-10">
           <span class="font-display font-bold text-lg text-white leading-none tracking-wide group-hover:text-laser transition-colors">L M PRECISION</span>
-          <span class="font-mono text-[10px] text-steel-500 uppercase tracking-widest">Pte Ltd</span>
+          <span class="font-mono text-[10px] text-steel-500 uppercase tracking-widest">Industrial Engraving · Est. 1984</span>
         </div>
       </a>
 
