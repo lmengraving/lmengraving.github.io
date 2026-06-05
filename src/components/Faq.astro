@@ -1,0 +1,77 @@
+---
+/**
+ * Faq.astro — industrial FAQ + FAQPage structured data.
+ *
+ * Adds keyword-rich, B2B-intent content (materials, tolerances, EDM
+ * electrodes, traceability marking) to the homepage and emits FAQPage
+ * JSON-LD for a shot at FAQ rich results. Uses native <details> for an
+ * accessible, no-JS accordion in the existing spec-sheet style.
+ */
+const faqs = [
+  {
+    q: 'What industries do you serve?',
+    a: 'We work with injection moulding, die casting, medical device, aerospace, automotive, packaging and precision tooling manufacturers across Singapore and Southeast Asia. Most of our work is engraving and marking on moulds, electrodes and production tooling.',
+  },
+  {
+    q: 'What tolerances can you hold?',
+    a: 'Our standard tolerance is ±0.05 mm, with a minimum character height of 0.1 mm. Every part is 100% inspected before it leaves the workshop.',
+  },
+  {
+    q: 'What materials can you engrave?',
+    a: 'Hardened tool steels up to 60 HRC (Stavax, 2083 ESR, D2 and similar), aluminium, brass, copper and graphite. This covers mould cavities and inserts, marking dies, and EDM electrodes.',
+  },
+  {
+    q: 'Do you engrave EDM electrodes?',
+    a: 'Yes. We laser-engrave carbon graphite and copper electrodes for EDM sinking, producing raised or sunk characters with any specified over-burn for clean, repeatable cavity detail.',
+  },
+  {
+    q: 'Can you do mould cavity texturing and 3D laser engraving?',
+    a: 'Yes. Using 5-axis laser and multi-axis CNC we engrave logos, part IDs, revision numbers, 3D graphics and functional textures directly onto mould cavities, cores, inserts, sliders and lifters.',
+  },
+  {
+    q: 'Do you provide traceability marking for production parts?',
+    a: 'We mark permanent serial numbers, date codes, bar codes, QR codes and UID/Data Matrix codes for full part traceability, including corrosion-resistant laser annealing on stainless steel and titanium for medical and aerospace components.',
+  },
+  {
+    q: 'Where are you located and do you serve all of Singapore?',
+    a: 'Our workshop is at 50 Bukit Batok Street 23, #03-27 Midview Building, Singapore 659578. We serve manufacturers island-wide and ship tooling across the region.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section id="faq" class="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+
+  <div class="max-w-3xl mx-auto px-6 lg:px-8 relative">
+    <div class="mb-10 md:mb-14 reveal">
+      <div class="font-mono text-[11px] tracking-[0.28em] text-steel-500 uppercase mb-3.5">[ 05 ] — FAQ</div>
+      <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
+        Common <span class="text-laser">Questions</span>
+      </h2>
+    </div>
+
+    <div class="border border-steel-800 reveal">
+      {faqs.map((f) => (
+        <details class="group border-b border-steel-800 last:border-b-0">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 md:px-6 py-5 hover:bg-steel-900/40 transition-colors">
+            <h3 class="font-display text-base md:text-lg font-semibold text-white">{f.q}</h3>
+            <svg class="w-4 h-4 text-laser shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" /></svg>
+          </summary>
+          <p class="font-body text-sm md:text-base text-steel-300 leading-relaxed px-5 md:px-6 pb-5 -mt-1 max-w-prose">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>
