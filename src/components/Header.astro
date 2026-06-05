@@ -67,8 +67,8 @@ const mobileNavLinks = [
 
 <header class="fixed top-0 left-0 right-0 z-40 bg-steel-950/80 backdrop-blur-md border-b border-steel-800/50">
 
-  <!-- Spec-sheet utility bar -->
-  <div class="border-b border-steel-800/50 hidden sm:block">
+  <!-- Spec-sheet utility bar (collapses on scroll) -->
+  <div id="util-bar" class="border-b border-steel-800/50 hidden sm:block overflow-hidden max-h-10 opacity-100 transition-all duration-300 ease-out">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex items-center justify-between h-8 font-mono text-[10px] tracking-[0.12em] text-steel-500">
         <div class="flex items-center gap-5 whitespace-nowrap overflow-hidden">
@@ -219,6 +219,22 @@ const mobileNavLinks = [
   const hamburgerMiddle = document.getElementById('hamburger-middle');
   const hamburgerBottom = document.getElementById('hamburger-bottom');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+  // Collapse the spec-sheet utility bar once the page is scrolled, leaving
+  // just the nav fixed to the top (mirrors the reference design).
+  const utilBar = document.getElementById('util-bar');
+  function updateUtilBar() {
+    if (!utilBar) return;
+    if (window.scrollY > 8) {
+      utilBar.classList.remove('max-h-10', 'opacity-100');
+      utilBar.classList.add('max-h-0', 'opacity-0');
+    } else {
+      utilBar.classList.add('max-h-10', 'opacity-100');
+      utilBar.classList.remove('max-h-0', 'opacity-0');
+    }
+  }
+  window.addEventListener('scroll', updateUtilBar, { passive: true });
+  updateUtilBar();
 
   let isMenuOpen = false;
 

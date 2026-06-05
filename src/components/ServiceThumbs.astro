@@ -1,0 +1,43 @@
+---
+/**
+ * ServiceThumbs.astro
+ *
+ * Spec-sheet thumbnail strip for a service card. Shows the first `visible`
+ * images; the rest stay in the DOM (hidden) so the shared lightbox can still
+ * cycle through the FULL set in the original order. A "+N" overlay on the last
+ * visible tile signals there are more.
+ */
+interface Props {
+  images: { src: string; title: string }[];
+  visible?: number;
+}
+const { images, visible = 3 } = Astro.props;
+const extra = images.length - visible;
+---
+
+<div class="grid grid-cols-3 gap-1.5">
+  {images.map((image, i) => (
+    <button
+      class:list={[
+        'lightbox-trigger group/thumb relative overflow-hidden bg-black border border-steel-800 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser',
+        i >= visible && 'hidden',
+      ]}
+      data-src={image.src}
+      data-title={image.title}
+      type="button"
+      aria-label={image.title}
+    >
+      <img
+        src={image.src}
+        alt={image.title}
+        loading="lazy"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105"
+      />
+      {i === visible - 1 && extra > 0 ? (
+        <span class="absolute right-1.5 bottom-1.5 bg-steel-950/85 border border-steel-700 font-mono text-[10px] leading-none text-white px-1.5 py-1">+{extra}</span>
+      ) : (
+        <span class="absolute right-1.5 bottom-1.5 font-mono text-xs text-white/0 group-hover/thumb:text-white/90 transition-colors">⤢</span>
+      )}
+    </button>
+  ))}
+</div>
