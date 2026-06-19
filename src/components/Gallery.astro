@@ -1,0 +1,101 @@
+---
+/**
+ * Gallery.astro — "Selected Work" portfolio
+ *
+ * Surfaces the strongest engraving photos at real size to act as the site's
+ * trust anchor (no testimonials/client logos available). Bilingual via the
+ * `lang` prop.
+ *
+ * IMPORTANT: this section reuses the lightbox that the Services / ServicesZh
+ * component already renders on the page. It only emits `.lightbox-trigger`
+ * buttons inside a `.grid`, so the existing lightbox script binds them and
+ * cycles through this gallery's own image set. Gallery must therefore be
+ * placed AFTER the Services component on the page.
+ */
+interface Props {
+  lang?: 'en' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
+
+const work = [
+  { src: '/laser-engraved-mold-cavity.jpeg',            en: 'Laser-Engraved Mold Cavity',      zh: '激光雕刻模腔' },
+  { src: '/EmbossingDieSet.jpeg',                        en: 'Large Embossing Die Set',         zh: '大型压纹模具套装' },
+  { src: '/HotStampingDie.jpeg',                         en: 'Brass Hot Stamping Die',          zh: '黄铜烫金模具' },
+  { src: '/ElectrodeLogo3D.jpeg',                        en: '3D Logo EDM Electrode',           zh: '3D 标志 EDM 电极' },
+  { src: '/copper-edm-electrode-branding.jpeg',          en: 'Copper EDM Electrode',            zh: '铜 EDM 电极' },
+  { src: '/Logo3DProfile.jpeg',                          en: '3D Profile with Part ID',         zh: '3D 轮廓与零件 ID' },
+  { src: '/RevisionID&Logo.jpeg',                        en: 'Revision ID & Brand Logo',        zh: '版本 ID 与品牌标志' },
+  { src: '/laser-etched-graduations-stainless-steel.jpeg', en: 'Laser-Etched Graduations',      zh: '激光蚀刻刻度' },
+  { src: '/polished-mold-cores-consumer-goods.jpeg',     en: 'High-Polish Mold Cores',          zh: '高抛光模芯' },
+  { src: '/rotary-laser-marking-anodized-aluminum.jpeg', en: 'Rotary Laser Marking',            zh: '旋转激光打标' },
+  { src: '/high-precision-edm-electrode-text.jpeg',      en: 'Precision Electrode Text',        zh: '精密电极文字' },
+  { src: '/CavityInsert3D.jpeg',                         en: '3D Cavity Insert',                zh: '3D 型腔镶件' },
+];
+
+const t = {
+  en: {
+    index: '[ 03 ]',
+    eyebrow: 'Selected Work',
+    title1: 'Engraving, up',
+    titleAccent: 'close',
+    count: `${work.length} PROJECTS`,
+    sub: 'A cross-section of recent mold, die, electrode and marking work. Tap any frame to enlarge.',
+  },
+  zh: {
+    index: '[ 03 ]',
+    eyebrow: '精选作品',
+    title1: '雕刻细节，',
+    titleAccent: '近观',
+    count: `${work.length} 个项目`,
+    sub: '近期模具、模冲、电极与打标作品的代表性案例。点击任意图片可放大查看。',
+  },
+}[lang];
+---
+
+<section id="work" class="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal">
+      <div class="max-w-2xl">
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5"><span class="text-laser">{t.index}</span> — {t.eyebrow}</div>
+        <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
+          {t.title1} <span class="text-laser">{t.titleAccent}</span>
+        </h2>
+        <p class="font-body text-base md:text-lg text-steel-300 mt-4">{t.sub}</p>
+      </div>
+      <div class="font-mono text-[11px] tracking-[0.14em] text-steel-400 shrink-0">{t.count}</div>
+    </div>
+
+    <!-- Reuses the page's existing lightbox (from Services). The `.grid` wrapper
+         scopes the lightbox cycle to this gallery's images. -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 md:gap-3 reveal">
+      {work.map((item, i) => {
+        const title = lang === 'zh' ? item.zh : item.en;
+        return (
+          <button
+            class="lightbox-trigger group/work relative overflow-hidden bg-black border border-steel-700 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser hover:border-laser/60 transition-colors"
+            data-src={item.src}
+            data-title={title}
+            type="button"
+            aria-label={title}
+          >
+            <img
+              src={item.src}
+              alt={title}
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover/work:scale-110"
+            />
+            <!-- corner index tag -->
+            <span class="absolute left-2 top-2 z-[2] font-mono text-[10px] leading-none text-steel-200 bg-steel-950/70 border border-steel-700 px-1.5 py-1">{String(i + 1).padStart(2, '0')}</span>
+            <!-- caption: always legible on mobile, slides up on hover for pointer devices -->
+            <span class="absolute inset-x-0 bottom-0 z-[2] p-2.5 pt-8 bg-gradient-to-t from-steel-950 via-steel-950/70 to-transparent">
+              <span class="block font-mono text-[10.5px] md:text-[11px] leading-snug text-white">{title}</span>
+            </span>
+            <span class="absolute right-2 bottom-2 z-[2] font-mono text-sm text-white/0 group-hover/work:text-white transition-colors">⤢</span>
+          </button>
+        );
+      })}
+    </div>
+  </div>
+</section>

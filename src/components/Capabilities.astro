@@ -34,7 +34,7 @@ const content = {
       { v: '100%', k: 'Inspection' },
       { v: 'Zero', k: 'Defects' },
       { v: 'Secure', k: 'IP Protected' },
-      { v: '40+', k: 'Years · Est. 1984' },
+      { v: '40+', k: 'Years · Since 1984' },
     ],
   },
   zh: {
@@ -77,22 +77,22 @@ const industries = lang === 'zh'
     <!-- Section header -->
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 reveal">
       <div>
-        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-500 uppercase mb-3.5">{content.index} — {content.eyebrow}</div>
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5"><span class="text-laser">{content.index}</span> — {content.eyebrow}</div>
         <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
           {content.title1} <span class="text-laser">{content.titleAccent}</span>
         </h2>
       </div>
-      <div class="font-mono text-[11px] tracking-[0.14em] text-steel-500">{content.qa}</div>
+      <div class="font-mono text-[11px] tracking-[0.14em] text-steel-400">{content.qa}</div>
     </div>
 
-    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-14 items-start">
+    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-stretch">
 
       <!-- Spec table -->
       <table class="w-full border border-steel-800 border-collapse">
         <tbody>
           {content.rows.map((r) => (
             <tr class="border-b border-steel-800 last:border-b-0 hover:bg-steel-900/40 transition-colors">
-              <td class="font-mono text-[11px] tracking-[0.1em] uppercase text-steel-500 w-[46%] border-r border-steel-800 px-4 py-4 align-middle">{r.k}</td>
+              <td class="font-mono text-[11px] tracking-[0.1em] uppercase text-steel-300 w-[46%] border-r border-steel-800 px-4 py-4 align-middle">{r.k}</td>
               <td class="font-display font-semibold text-white text-lg md:text-xl px-4 py-4 align-middle">{r.v}<span class="text-laser">{r.u}</span></td>
             </tr>
           ))}
@@ -100,10 +100,10 @@ const industries = lang === 'zh'
       </table>
 
       <!-- Dimensional window + industries -->
-      <div>
+      <div class="flex flex-col h-full">
         <div class="border border-steel-800 bg-steel-900/40 p-6">
           <div class="flex items-center justify-between mb-5">
-            <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-steel-500">{content.windowLabel}</span>
+            <span class="font-mono text-[10.5px] tracking-[0.2em] uppercase text-steel-400">{content.windowLabel}</span>
             <span class="font-mono text-[11px] text-laser border border-laser px-2.5 py-1">±0.05mm</span>
           </div>
           <div class="relative h-20 border border-steel-700 bg-steel-950 overflow-hidden">
@@ -111,7 +111,7 @@ const industries = lang === 'zh'
               {[...Array(11)].map((_, i) => (
                 <div class={`flex-1 ${i < 10 ? 'border-r' : ''} ${i % 5 === 0 ? 'border-steel-700' : 'border-steel-800/60'} relative`}>
                   {i % 5 === 0 && (
-                    <span class="absolute bottom-1 left-1/2 -translate-x-1/2 font-mono text-[8px] text-steel-600">{((i - 5) * 0.02).toFixed(2)}</span>
+                    <span class="absolute bottom-1 left-1/2 -translate-x-1/2 font-mono text-[8px] text-steel-500">{((i - 5) * 0.02).toFixed(2)}</span>
                   )}
                 </div>
               ))}
@@ -122,11 +122,11 @@ const industries = lang === 'zh'
           <p class="font-body text-sm text-steel-400 mt-4">{content.note}</p>
         </div>
 
-        <div class="mt-6">
-          <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-steel-500 mb-3.5">{content.industriesLabel}</div>
+        <div class="mt-6 lg:mt-auto lg:pt-8">
+          <div class="font-mono text-[10.5px] tracking-[0.2em] uppercase text-steel-400 mb-3.5">{content.industriesLabel}</div>
           <div class="flex flex-wrap gap-2">
             {industries.map((industry) => (
-              <span class="font-mono text-[11px] text-steel-300 border border-steel-700 px-3 py-1.5 hover:border-laser/60 hover:text-white transition-colors">{industry}</span>
+              <span class="font-mono text-[11px] text-steel-200 border border-steel-700 px-3 py-1.5 hover:border-laser/60 hover:text-white transition-colors">{industry}</span>
             ))}
           </div>
         </div>
@@ -136,12 +136,12 @@ const industries = lang === 'zh'
 
     <!-- Quality guarantee strip (folded in from the former Precision section) -->
     <div class="mt-10 md:mt-14 reveal">
-      <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-steel-500 mb-3.5">{content.guaranteeLabel}</div>
+      <div class="font-mono text-[10.5px] tracking-[0.2em] uppercase text-steel-400 mb-3.5">{content.guaranteeLabel}</div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-steel-800 border border-steel-800">
         {content.guarantees.map((g) => (
           <div class="bg-steel-950 px-4 py-5 hover:bg-steel-900/40 transition-colors">
             <div class="font-display font-bold text-white text-xl md:text-2xl leading-none">{g.v}</div>
-            <div class="font-mono text-[9.5px] tracking-[0.12em] text-steel-500 uppercase mt-2">{g.k}</div>
+            <div class="font-mono text-[10.5px] tracking-[0.12em] text-steel-400 uppercase mt-2">{g.k}</div>
           </div>
         ))}
       </div>

@@ -15,11 +15,11 @@ const { images, visible = 3 } = Astro.props;
 const extra = images.length - visible;
 ---
 
-<div class="grid grid-cols-3 gap-1.5">
+<div class="grid grid-cols-3 gap-2">
   {images.map((image, i) => (
     <button
       class:list={[
-        'lightbox-trigger group/thumb relative overflow-hidden bg-black border border-steel-800 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser',
+        'lightbox-trigger group/thumb relative overflow-hidden bg-black border border-steel-700 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser hover:border-laser/60 transition-colors',
         i >= visible && 'hidden',
       ]}
       data-src={image.src}
@@ -31,12 +31,13 @@ const extra = images.length - visible;
         src={image.src}
         alt={image.title}
         loading="lazy"
-        class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
       />
+      <span class="absolute inset-0 bg-laser/0 group-hover/thumb:bg-laser/10 transition-colors"></span>
       {i === visible - 1 && extra > 0 ? (
-        <span class="absolute right-1.5 bottom-1.5 bg-steel-950/85 border border-steel-700 font-mono text-[10px] leading-none text-white px-1.5 py-1">+{extra}</span>
+        <span class="absolute inset-0 flex items-center justify-center bg-steel-950/70 group-hover/thumb:bg-steel-950/55 transition-colors font-mono text-sm font-medium leading-none text-white">+{extra} more</span>
       ) : (
-        <span class="absolute right-1.5 bottom-1.5 font-mono text-xs text-white/0 group-hover/thumb:text-white/90 transition-colors">⤢</span>
+        <span class="absolute right-1.5 bottom-1.5 font-mono text-sm text-white/0 group-hover/thumb:text-white transition-colors">⤢</span>
       )}
     </button>
   ))}

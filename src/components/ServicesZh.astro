@@ -127,18 +127,19 @@ const services = [
 ---
 
 <section id="services" class="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14 lg:mb-16 reveal">
       <div class="max-w-2xl">
-        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-500 uppercase mb-3.5">[ 01 ] — 我们的业务</div>
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5"><span class="text-laser">[ 01 ]</span> — 我们的业务</div>
         <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
           我们的 <span class="text-laser">服务</span>
         </h2>
-        <p class="font-body text-base md:text-lg text-steel-400 mt-4 hidden md:block">
+        <p class="font-body text-base md:text-lg text-steel-300 mt-4 hidden md:block">
           从精密模具组件到先进激光加工 —— 为高要求行业提供全面的制造解决方案。
         </p>
       </div>
-      <div class="font-mono text-[11px] tracking-[0.14em] text-steel-500 shrink-0">5 条产品线</div>
+      <div class="font-mono text-[11px] tracking-[0.14em] text-steel-400 shrink-0">5 条产品线</div>
     </div>
 
     <!-- Spec-sheet service grid: thin 1px dividers via the grid's background -->
@@ -159,7 +160,7 @@ const services = [
                   <p class="font-body text-sm text-steel-300 mt-2.5 max-w-prose">{service.description}</p>
                   <div class="flex flex-wrap gap-2 mt-5">
                     {service.capabilities.map((cap) => (
-                      <span class="font-mono text-[10.5px] tracking-[0.04em] text-steel-300 border border-steel-700 px-2.5 py-1.5">{cap.name}</span>
+                      <span class="font-mono text-[11px] tracking-[0.04em] text-steel-200 border border-steel-600 px-3 py-1.5 hover:border-laser/50 transition-colors">{cap.name}</span>
                     ))}
                   </div>
                 </div>
@@ -173,7 +174,7 @@ const services = [
                 </div>
                 <div class="flex flex-wrap gap-2">
                   {service.capabilities.map((cap) => (
-                    <span class="font-mono text-[10.5px] tracking-[0.04em] text-steel-300 border border-steel-700 px-2.5 py-1.5">{cap.name}</span>
+                    <span class="font-mono text-[11px] tracking-[0.04em] text-steel-200 border border-steel-600 px-3 py-1.5 hover:border-laser/50 transition-colors">{cap.name}</span>
                   ))}
                 </div>
                 <div class="mt-auto">
