@@ -230,6 +230,13 @@ const scrambledDomain = encodedDomain.split('').reverse().join('');
       const email = assembleEmail(button);
       const label = button.querySelector('.label-text');
 
+      // Touch devices: open the mail app directly — "click to copy" hover
+      // hints never show, so a silent copy would be confusing.
+      if (window.matchMedia('(hover: none)').matches) {
+        window.location.href = createMailto(button);
+        return;
+      }
+
       try {
         await navigator.clipboard.writeText(email);
 

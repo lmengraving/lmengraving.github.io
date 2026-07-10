@@ -6,37 +6,82 @@
  * electrodes, traceability marking) to the homepage and emits FAQPage
  * JSON-LD for a shot at FAQ rich results. Uses native <details> for an
  * accessible, no-JS accordion in the existing spec-sheet style.
+ * Bilingual via the `lang` prop.
  */
-const faqs = [
-  {
-    q: 'What industries do you serve?',
-    a: 'We work with injection moulding, die casting, medical device, aerospace, automotive, packaging and precision tooling manufacturers across Singapore and Southeast Asia. Most of our work is engraving and marking on moulds, electrodes and production tooling.',
-  },
-  {
-    q: 'What tolerances can you hold?',
-    a: 'Our standard tolerance is ±0.05 mm, with a minimum character height of 0.1 mm. Every part is 100% inspected before it leaves the workshop.',
-  },
-  {
-    q: 'What materials can you engrave?',
-    a: 'Hardened tool steels up to 60 HRC (Stavax, 2083 ESR, D2 and similar), aluminium, brass, copper and graphite. This covers mould cavities and inserts, marking dies, and EDM electrodes.',
-  },
-  {
-    q: 'Do you engrave EDM electrodes?',
-    a: 'Yes. We laser-engrave carbon graphite and copper electrodes for EDM sinking, producing raised or sunk characters with any specified over-burn for clean, repeatable cavity detail.',
-  },
-  {
-    q: 'Can you do mould cavity texturing and 3D laser engraving?',
-    a: 'Yes. Using 5-axis laser and multi-axis CNC we engrave logos, part IDs, revision numbers, 3D graphics and functional textures directly onto mould cavities, cores, inserts, sliders and lifters.',
-  },
-  {
-    q: 'Do you provide traceability marking for production parts?',
-    a: 'We mark permanent serial numbers, date codes, bar codes, QR codes and UID/Data Matrix codes for full part traceability, including corrosion-resistant laser annealing on stainless steel and titanium for medical and aerospace components.',
-  },
-  {
-    q: 'Where are you located and do you serve all of Singapore?',
-    a: 'Our workshop is at 50 Bukit Batok Street 23, #03-27 Midview Building, Singapore 659578. We serve manufacturers island-wide and ship tooling across the region.',
-  },
-];
+interface Props {
+  lang?: 'en' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
+
+const faqsByLang = {
+  en: [
+    {
+      q: 'What industries do you serve?',
+      a: 'We work with injection moulding, die casting, medical device, aerospace, automotive, packaging and precision tooling manufacturers across Singapore and Southeast Asia. Most of our work is engraving and marking on moulds, electrodes and production tooling.',
+    },
+    {
+      q: 'What tolerances can you hold?',
+      a: 'Our standard tolerance is ±0.05 mm, with a minimum character height of 0.1 mm. Every part is 100% inspected before it leaves the workshop.',
+    },
+    {
+      q: 'What materials can you engrave?',
+      a: 'Hardened tool steels up to 60 HRC (Stavax, 2083 ESR, D2 and similar), aluminium, brass, copper and graphite. This covers mould cavities and inserts, marking dies, and EDM electrodes.',
+    },
+    {
+      q: 'Do you engrave EDM electrodes?',
+      a: 'Yes. We laser-engrave carbon graphite and copper electrodes for EDM sinking, producing raised or sunk characters with any specified over-burn for clean, repeatable cavity detail.',
+    },
+    {
+      q: 'Can you do mould cavity texturing and 3D laser engraving?',
+      a: 'Yes. Using 5-axis laser and multi-axis CNC we engrave logos, part IDs, revision numbers, 3D graphics and functional textures directly onto mould cavities, cores, inserts, sliders and lifters.',
+    },
+    {
+      q: 'Do you provide traceability marking for production parts?',
+      a: 'We mark permanent serial numbers, date codes, bar codes, QR codes and UID/Data Matrix codes for full part traceability, including corrosion-resistant laser annealing on stainless steel and titanium for medical and aerospace components.',
+    },
+    {
+      q: 'Where are you located and do you serve all of Singapore?',
+      a: 'Our workshop is at 50 Bukit Batok Street 23, #03-27 Midview Building, Singapore 659578. We serve manufacturers island-wide and ship tooling across the region.',
+    },
+  ],
+  zh: [
+    {
+      q: '你们服务哪些行业？',
+      a: '我们服务于新加坡及东南亚的注塑成型、压铸、医疗器械、航空航天、汽车、包装及精密工装制造商。大部分业务是在模具、电极和生产工装上进行雕刻与打标。',
+    },
+    {
+      q: '你们能保证什么公差？',
+      a: '我们的标准公差为 ±0.05 毫米，最小字符高度为 0.1 毫米。每件产品出厂前均经 100% 检验。',
+    },
+    {
+      q: '你们可以雕刻哪些材料？',
+      a: '硬度达 60 HRC 的硬化工具钢（Stavax、2083 ESR、D2 等）、铝、黄铜、铜及石墨，涵盖模腔与镶件、打标模具及 EDM 电极。',
+    },
+    {
+      q: '你们提供 EDM 电极雕刻吗？',
+      a: '是的。我们对碳石墨和铜电极进行激光雕刻，用于 EDM 放电加工，可按指定放电间隙制作凸起或凹陷字符，实现清晰、可重复的型腔细节。',
+    },
+    {
+      q: '可以进行模腔纹理加工和 3D 激光雕刻吗？',
+      a: '可以。我们使用五轴激光和多轴 CNC，直接在模腔、模芯、镶件、滑块和顶针上雕刻 Logo、零件编号、版本号、3D 图形及功能性纹理。',
+    },
+    {
+      q: '你们提供生产零件的追溯打标吗？',
+      a: '我们提供永久性序列号、日期代码、条形码、二维码及 UID/Data Matrix 码打标，实现完整零件追溯，并可在不锈钢和钛合金上进行防腐蚀激光退火打标，适用于医疗和航空航天部件。',
+    },
+    {
+      q: '你们的地址在哪里？服务范围覆盖全新加坡吗？',
+      a: '我们的车间位于 50 Bukit Batok Street 23, #03-27 Midview Building, Singapore 659578。我们服务全岛制造商，并可将工装运送至周边地区。',
+    },
+  ],
+};
+
+const t = {
+  en: { index: '[ 04 ]', eyebrow: 'FAQ', title1: 'Common', titleAccent: 'Questions' },
+  zh: { index: '[ 04 ]', eyebrow: '常见问题', title1: '常见', titleAccent: '问题' },
+}[lang];
+
+const faqs = faqsByLang[lang];
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -54,9 +99,9 @@ const faqSchema = {
 
   <div class="max-w-3xl mx-auto px-6 lg:px-8 relative">
     <div class="mb-10 md:mb-14 reveal">
-      <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5"><span class="text-laser">[ 05 ]</span> — FAQ</div>
+      <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5"><span class="text-laser">{t.index}</span> — {t.eyebrow}</div>
       <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-white">
-        Common <span class="text-laser">Questions</span>
+        {t.title1} <span class="text-laser">{t.titleAccent}</span>
       </h2>
     </div>
 

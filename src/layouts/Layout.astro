@@ -5,6 +5,8 @@ interface Props {
   canonicalPath?: string;
   lang?: 'en' | 'zh';
   noindex?: boolean;
+  /** Set false for pages that only exist in one language (no /zh/ twin). */
+  hasZhVersion?: boolean;
 }
 
 const defaultDescription = "Singapore's leading precision engraving specialist since 1984. Expert laser mold engraving, custom marking dies, steel stamps, EDM electrode engraving & industrial laser marking services in SG. ISO-quality precision engineering.";
@@ -16,7 +18,8 @@ const {
   description,
   canonicalPath = "",
   lang = 'en',
-  noindex = false
+  noindex = false,
+  hasZhVersion = true
 } = Astro.props;
 
 const finalDescription = description || (lang === 'zh' ? defaultDescriptionZh : defaultDescription);
@@ -41,17 +44,18 @@ const fullTitle = lang === 'zh'
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={finalDescription} />
-    <meta name="keywords" content={lang === 'zh'
-      ? "新加坡雕刻, 精密雕刻新加坡, 激光雕刻新加坡, 新加坡激光打标, 模具雕刻, 定制打标模具, 钢印, 滚压模具, 3D模具雕刻, 电极雕刻, EDM电极, 工业激光打标, CNC雕刻, 追溯标记, 二维码打标, 条码雕刻"
-      : "engraving sg, precision engraving singapore, laser engraving singapore, engraving services singapore, mold engraving, custom marking dies, steel stamps, rolling dies, 3D mold engraving, electrode engraving, EDM electrodes, industrial laser marking singapore, CNC engraving, traceability marking, QR code marking, barcode engraving"} />
     <meta name="author" content="L M Precision Pte Ltd" />
     <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Hreflang Tags for SEO -->
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="zh" href={zhUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <!-- Hreflang Tags for SEO (only when a translated twin actually exists) -->
+    {hasZhVersion && (
+      <>
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="zh" href={zhUrl} />
+        <link rel="alternate" hreflang="x-default" href={enUrl} />
+      </>
+    )}
 
     <!-- Geographic Meta Tags -->
     <meta name="geo.region" content="SG" />
@@ -86,6 +90,10 @@ const fullTitle = lang === 'zh'
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Mark JS availability so reveal-on-scroll styles only hide content when
+         the IntersectionObserver script can actually reveal it again. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,8 +110,8 @@ const fullTitle = lang === 'zh'
         "description": "Singapore's leading precision engraving specialist since 1984. Expert laser mold engraving, custom marking dies, steel stamps, EDM electrode engraving and industrial laser marking services.",
         "url": "https://lmengraving.sg",
         "telephone": "+65 6316 6009",
-        "email": "lm.engraving@yahoo.com.sg",
-        "image": "https://lmengraving.sg/logo.svg",
+        "image": "https://lmengraving.sg/og-image.jpg",
+        "logo": "https://lmengraving.sg/logo.svg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "50 Bukit Batok Street 23, #03-27 Midview Building",
@@ -119,7 +127,7 @@ const fullTitle = lang === 'zh'
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
+          "opens": "09:30",
           "closes": "18:00"
         },
         "priceRange": "$$",
@@ -240,18 +248,18 @@ const fullTitle = lang === 'zh'
         opacity: 0.5;
       }
 
-      /* Reveal-on-scroll */
-      .reveal {
+      /* Reveal-on-scroll (scoped to html.js so content stays visible without JS) */
+      html.js .reveal {
         opacity: 0;
         transform: translateY(22px);
         transition: opacity 0.7s ease, transform 0.7s ease;
       }
-      .reveal.in {
+      html.js .reveal.in {
         opacity: 1;
         transform: none;
       }
       @media (prefers-reduced-motion: reduce) {
-        .reveal { opacity: 1; transform: none; }
+        html.js .reveal { opacity: 1; transform: none; }
       }
 
       /* Animation delays */

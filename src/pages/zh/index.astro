@@ -2,17 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
-import Services from '../../components/Services.astro';
 import Capabilities from '../../components/Capabilities.astro';
-import Contact from '../../components/Contact.astro';
-import Footer from '../../components/Footer.astro';
+import Gallery from '../../components/Gallery.astro';
+import Faq from '../../components/Faq.astro';
 import ServicesZh from '../../components/ServicesZh.astro';
 import ContactZh from '../../components/ContactZh.astro';
 import FooterZh from '../../components/FooterZh.astro';
-import Gallery from '../../components/Gallery.astro';
 
-// Hero and Capabilities are bilingual (lang prop); the remaining sections
-// still use dedicated Zh components.
+// Hero, Capabilities, Gallery and Faq are bilingual (lang prop); the remaining
+// sections still use dedicated Zh components.
 ---
 
 <Layout title="精密雕刻新加坡 | 工业激光打标与模具雕刻" canonicalPath="/zh/" lang="zh">
@@ -22,6 +20,7 @@ import Gallery from '../../components/Gallery.astro';
     <ServicesZh />
     <Capabilities lang="zh" />
     <Gallery lang="zh" />
+    <Faq lang="zh" />
     <ContactZh />
   </main>
   <FooterZh />
