@@ -7,8 +7,11 @@
  * tags, FIG.01 callout, meta row). Uses the existing steel/laser tokens,
  * Oswald/Barlow/JetBrains Mono, and the project's animate-fade-up entrance.
  *
- * Image: /public/laser-engraved-mold-cavity.jpeg (already in the repo).
+ * Image: src/assets/work/laser-engraved-mold-cavity.jpeg (optimized via astro:assets).
  */
+import { Image } from 'astro:assets';
+import moldCavity from '../assets/work/laser-engraved-mold-cavity.jpeg';
+
 interface Props {
   lang?: 'en' | 'zh';
 }
@@ -104,7 +107,17 @@ const t = {
           <span class="absolute top-1.5 right-1.5 w-[18px] h-[18px] border-r-[1.5px] border-t-[1.5px] border-laser z-[3]"></span>
           <span class="absolute bottom-1.5 left-1.5 w-[18px] h-[18px] border-l-[1.5px] border-b-[1.5px] border-laser z-[3]"></span>
           <span class="absolute bottom-1.5 right-1.5 w-[18px] h-[18px] border-r-[1.5px] border-b-[1.5px] border-laser z-[3]"></span>
-          <img src="/laser-engraved-mold-cavity.jpeg" alt="Laser-engraved injection mold cavity" class="w-full h-full object-cover" loading="eager" />
+          <Image
+            src={moldCavity}
+            alt="Laser-engraved injection mold cavity"
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 1024px) 45vw, calc(100vw - 3.5rem)"
+            format="webp"
+            quality={80}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover"
+          />
         </div>
 
         <!-- floating tags -->

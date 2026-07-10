@@ -12,6 +12,9 @@
  * cycles through this gallery's own image set. Gallery must therefore be
  * placed AFTER the Services component on the page.
  */
+import { Image, getImage } from 'astro:assets';
+import { workImage } from '../assets/work';
+
 interface Props {
   lang?: 'en' | 'zh';
 }
@@ -31,6 +34,15 @@ const work = [
   { src: '/high-precision-edm-electrode-text.jpeg',      en: 'Precision Electrode Text',        zh: '精密电极文字' },
   { src: '/CavityInsert3D.jpeg',                         en: '3D Cavity Insert',                zh: '3D 型腔镶件' },
 ];
+
+// Resolve each key to its optimized asset + a full-size WebP for the lightbox.
+const resolvedWork = await Promise.all(
+  work.map(async (item) => {
+    const asset = workImage(item.src);
+    const full = await getImage({ src: asset, width: Math.min(asset.width, 1600), format: 'webp', quality: 80 });
+    return { ...item, asset, fullSrc: full.src };
+  })
+);
 
 const t = {
   en: {
@@ -70,19 +82,23 @@ const t = {
     <!-- Reuses the page's existing lightbox (from Services). The `.grid` wrapper
          scopes the lightbox cycle to this gallery's images. -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 md:gap-3 reveal">
-      {work.map((item, i) => {
+      {resolvedWork.map((item, i) => {
         const title = lang === 'zh' ? item.zh : item.en;
         return (
           <button
             class="lightbox-trigger group/work relative overflow-hidden bg-black border border-steel-700 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser hover:border-laser/60 transition-colors"
-            data-src={item.src}
+            data-src={item.fullSrc}
             data-title={title}
             type="button"
             aria-label={title}
           >
-            <img
-              src={item.src}
+            <Image
+              src={item.asset}
               alt={title}
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+              format="webp"
+              quality={75}
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover/work:scale-110"
             />

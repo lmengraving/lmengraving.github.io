@@ -6,30 +6,49 @@
  * images; the rest stay in the DOM (hidden) so the shared lightbox can still
  * cycle through the FULL set in the original order. A "+N" overlay on the last
  * visible tile signals there are more.
+ *
+ * Images are keyed by their "/Foo.jpeg" names and resolved through the
+ * astro:assets registry — thumbnails get responsive WebP renditions, the
+ * lightbox (`data-src`) gets a full-size WebP.
  */
+import { Image, getImage } from 'astro:assets';
+import { workImage } from '../assets/work';
+
 interface Props {
   images: { src: string; title: string }[];
   visible?: number;
 }
 const { images, visible = 3 } = Astro.props;
 const extra = images.length - visible;
+
+const resolved = await Promise.all(
+  images.map(async (image) => {
+    const asset = workImage(image.src);
+    const full = await getImage({ src: asset, width: Math.min(asset.width, 1600), format: 'webp', quality: 80 });
+    return { title: image.title, asset, fullSrc: full.src };
+  })
+);
 ---
 
 <div class="grid grid-cols-3 gap-2">
-  {images.map((image, i) => (
+  {resolved.map((image, i) => (
     <button
       class:list={[
         'lightbox-trigger group/thumb relative overflow-hidden bg-black border border-steel-700 aspect-[4/3] focus:outline-none focus-visible:ring-1 focus-visible:ring-laser hover:border-laser/60 transition-colors',
         i >= visible && 'hidden',
       ]}
-      data-src={image.src}
+      data-src={image.fullSrc}
       data-title={image.title}
       type="button"
       aria-label={image.title}
     >
-      <img
-        src={image.src}
+      <Image
+        src={image.asset}
         alt={image.title}
+        widths={[240, 480]}
+        sizes="(min-width: 768px) 15vw, 30vw"
+        format="webp"
+        quality={75}
         loading="lazy"
         class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-110"
       />
