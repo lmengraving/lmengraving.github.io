@@ -1,0 +1,221 @@
+---
+/**
+ * ServicePage.astro — shared template for the SEO service landing pages.
+ *
+ * Each page under src/pages/ supplies content props; this component renders
+ * the spec-sheet layout (hero → capabilities → specs → work → FAQ → contact)
+ * and emits Service + BreadcrumbList + FAQPage structured data.
+ *
+ * These pages are English-only, so Layout is told hasZhVersion={false} and
+ * the Header gets currentPath="/" (the language toggle then falls back to
+ * the homepages instead of linking to a non-existent /zh/ twin).
+ */
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { workImage } from '../assets/work';
+
+interface Props {
+  title: string;
+  metaDescription: string;
+  canonicalPath: string;
+  eyebrow: string;
+  h1: string;
+  h1Accent: string;
+  intro: string;
+  capabilities: { name: string; detail: string }[];
+  specs: { k: string; v: string; u?: string }[];
+  images: { src: string; title: string }[];
+  faqs: { q: string; a: string }[];
+  related: { href: string; label: string }[];
+  serviceName: string;
+}
+
+const {
+  title, metaDescription, canonicalPath, eyebrow,
+  h1, h1Accent, intro, capabilities, specs, images, faqs, related, serviceName,
+} = Astro.props;
+
+const siteUrl = 'https://lmengraving.sg';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: serviceName,
+  serviceType: serviceName,
+  description: metaDescription,
+  provider: { '@id': `${siteUrl}/#organization` },
+  areaServed: { '@type': 'Country', name: 'Singapore' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: serviceName, item: `${siteUrl}${canonicalPath}` },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout title={title} description={metaDescription} canonicalPath={canonicalPath} lang="en" hasZhVersion={false}>
+  <Header lang="en" currentPath="/" />
+  <main>
+
+    <!-- Hero -->
+    <section class="relative pt-40 lg:pt-44 pb-14 md:pb-20 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <nav aria-label="Breadcrumb" class="mb-6 opacity-0 animate-fade-up">
+          <ol class="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] text-steel-400 uppercase">
+            <li><a href="/" class="hover:text-laser transition-colors">Home</a></li>
+            <li aria-hidden="true" class="text-steel-600">/</li>
+            <li><a href="/#services" class="hover:text-laser transition-colors">Services</a></li>
+            <li aria-hidden="true" class="text-steel-600">/</li>
+            <li class="text-laser" aria-current="page">{eyebrow}</li>
+          </ol>
+        </nav>
+
+        <h1 class="font-display font-bold text-white text-4xl md:text-5xl lg:text-6xl leading-[1.02] tracking-tight mb-6 max-w-4xl opacity-0 animate-fade-up delay-100">
+          {h1} <span class="text-laser">{h1Accent}</span>
+        </h1>
+
+        <p class="font-body text-lg text-steel-300 max-w-2xl mb-9 leading-relaxed opacity-0 animate-fade-up delay-200">
+          {intro}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-up delay-300">
+          <a href="#quote" class="group inline-flex items-center justify-center gap-3 px-7 py-4 bg-laser text-white font-mono text-xs tracking-[0.16em] uppercase hover:bg-laser-glow transition-colors">
+            Request a Quote
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="/#services" class="inline-flex items-center justify-center gap-3 px-7 py-4 border border-steel-500 text-steel-100 font-mono text-xs tracking-[0.16em] uppercase hover:border-laser hover:text-white hover:bg-steel-900/60 transition-colors">
+            All Services
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="py-14 md:py-20 relative bg-steel-900/30">
+      <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5 reveal"><span class="text-laser">[ 01 ]</span> — What We Do</div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-10 reveal">
+          Capabilities <span class="text-laser">in detail</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-steel-800 border border-steel-800 reveal">
+          {capabilities.map((cap) => (
+            <div class="bg-steel-950 p-6 md:p-8 hover:bg-steel-900/60 transition-colors">
+              <h3 class="font-display text-lg md:text-xl font-semibold text-white mb-2.5">{cap.name}</h3>
+              <p class="font-body text-sm text-steel-300 leading-relaxed">{cap.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Specs -->
+    <section class="py-14 md:py-20 relative">
+      <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5 reveal"><span class="text-laser">[ 02 ]</span> — Technical Specification</div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-10 reveal">
+          Process <span class="text-laser">specs</span>
+        </h2>
+        <table class="w-full max-w-3xl border border-steel-800 border-collapse reveal">
+          <tbody>
+            {specs.map((r) => (
+              <tr class="border-b border-steel-800 last:border-b-0 hover:bg-steel-900/40 transition-colors">
+                <td class="font-mono text-[11px] tracking-[0.1em] uppercase text-steel-300 w-[46%] border-r border-steel-800 px-4 py-4 align-middle">{r.k}</td>
+                <td class="font-display font-semibold text-white text-lg md:text-xl px-4 py-4 align-middle">{r.v}<span class="text-laser">{r.u ?? ''}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Work samples -->
+    <section class="py-14 md:py-20 relative bg-steel-900/30">
+      <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5 reveal"><span class="text-laser">[ 03 ]</span> — Selected Work</div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-10 reveal">
+          Recent <span class="text-laser">examples</span>
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 md:gap-3 reveal">
+          {images.map((item) => (
+            <figure class="relative overflow-hidden bg-black border border-steel-700 aspect-[4/3]">
+              <Image
+                src={workImage(item.src)}
+                alt={item.title}
+                widths={[320, 480, 640]}
+                sizes="(min-width: 640px) 33vw, 50vw"
+                format="webp"
+                quality={75}
+                loading="lazy"
+                class="w-full h-full object-cover"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 p-2.5 pt-8 bg-gradient-to-t from-steel-950 via-steel-950/70 to-transparent">
+                <span class="block font-mono text-[10.5px] md:text-[11px] leading-snug text-white">{item.title}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-14 md:py-20 relative">
+      <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-steel-700 to-transparent"></div>
+      <div class="max-w-3xl mx-auto px-6 lg:px-8">
+        <div class="font-mono text-[11px] tracking-[0.28em] text-steel-400 uppercase mb-3.5 reveal"><span class="text-laser">[ 04 ]</span> — FAQ</div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-10 reveal">
+          Common <span class="text-laser">questions</span>
+        </h2>
+        <div class="border border-steel-800 reveal">
+          {faqs.map((f) => (
+            <details class="group border-b border-steel-800 last:border-b-0">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 md:px-6 py-5 hover:bg-steel-900/40 transition-colors">
+                <h3 class="font-display text-base md:text-lg font-semibold text-white">{f.q}</h3>
+                <svg class="w-4 h-4 text-laser shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" /></svg>
+              </summary>
+              <p class="font-body text-sm md:text-base text-steel-300 leading-relaxed px-5 md:px-6 pb-5 -mt-1 max-w-prose">{f.a}</p>
+            </details>
+          ))}
+        </div>
+
+        <!-- Related services -->
+        {related.length > 0 && (
+          <div class="mt-10">
+            <div class="font-mono text-[10.5px] tracking-[0.2em] uppercase text-steel-400 mb-3.5">Related Services</div>
+            <div class="flex flex-wrap gap-2">
+              {related.map((r) => (
+                <a href={r.href} class="font-mono text-[11px] text-steel-200 border border-steel-700 px-3 py-1.5 hover:border-laser/60 hover:text-white transition-colors">{r.label} →</a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Layout>
