@@ -1,0 +1,113 @@
+---
+/**
+ * EmailContact.astro
+ *
+ * Email contact rendered as plain text in the HTML so it is visible
+ * without JavaScript, selectable, copyable, and indexable by search
+ * engines. The copy button is a progressive enhancement.
+ *
+ * Variants:
+ *  - 'button': contact card with the address as a mailto link + copy button
+ *  - 'inline': orange quote CTA with a prefilled mailto, plain address below
+ */
+import { CONTACT } from '../consts';
+
+interface Props {
+  variant?: 'button' | 'inline';
+  lang?: 'en' | 'zh';
+}
+
+const { variant = 'button', lang = 'en' } = Astro.props;
+
+const labels = {
+  en: {
+    email: 'Email',
+    copy: 'Copy',
+    copied: 'Copied!',
+    sendQuote: 'Send Quote via Email',
+    orWrite: 'or write to',
+    subject: 'Quote Request - [Company Name]',
+    body: 'Hi L M Precision,%0D%0A%0D%0APlease provide a quote for the attached drawings.%0D%0A%0D%0AMaterial: %0D%0AQuantity: %0D%0A%0D%0AThank you,',
+  },
+  zh: {
+    email: '电子邮件',
+    copy: '复制',
+    copied: '已复制！',
+    sendQuote: '通过邮件发送报价请求',
+    orWrite: '或发送邮件至',
+    subject: '报价请求 - [公司名称]',
+    body: '您好 L M Precision，%0D%0A%0D%0A请根据附件图纸提供报价。%0D%0A%0D%0A材料：%0D%0A数量：%0D%0A%0D%0A谢谢，',
+  },
+};
+
+const t = labels[lang];
+const mailto = `mailto:${CONTACT.email}`;
+// Split so narrow screens wrap after the @ instead of mid-word
+const [emailUser, emailDomain] = CONTACT.email.split('@');
+const mailtoQuote = `${mailto}?subject=${encodeURIComponent(t.subject)}&body=${t.body}`;
+---
+
+{variant === 'button' && (
+  <div class="group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors">
+    <a href={mailto} class="flex items-center gap-4 flex-1 min-w-0">
+      <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <div class="min-w-0">
+        <div class="font-mono text-[10.5px] tracking-wider text-steel-400 uppercase group-hover:text-laser transition-colors">{t.email}</div>
+        <div class="font-display text-base sm:text-lg text-white">{emailUser}@<wbr />{emailDomain}</div>
+      </div>
+    </a>
+    <button
+      type="button"
+      class="copy-email-btn shrink-0 px-3 py-2 border border-steel-700 font-mono text-[10px] tracking-widest uppercase text-steel-300 hover:text-white hover:border-laser transition-colors cursor-pointer"
+      data-email={CONTACT.email}
+      data-copied={t.copied}
+    >{t.copy}</button>
+  </div>
+)}
+
+{variant === 'inline' && (
+  <div>
+    <a
+      href={mailtoQuote}
+      class="block w-full py-5 bg-laser text-white font-display text-sm tracking-widest uppercase text-center hover:brightness-110 transition-all hover:scale-[1.02] relative overflow-hidden group"
+    >
+      <span class="relative z-10 flex items-center justify-center gap-3">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        {t.sendQuote}
+      </span>
+    </a>
+    <div class="mt-3 text-center font-mono text-xs text-steel-300">
+      <span>{t.orWrite}&nbsp;</span><a href={mailto} class="text-white hover:text-laser transition-colors break-all">{CONTACT.email}</a>
+    </div>
+  </div>
+)}
+
+<script>
+  document.querySelectorAll('.copy-email-btn').forEach((el) => {
+    const btn = el as HTMLButtonElement;
+    if (!navigator.clipboard) {
+      btn.remove();
+      return;
+    }
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.email || '');
+        const original = btn.textContent;
+        btn.textContent = btn.dataset.copied || 'Copied!';
+        btn.classList.add('text-emerald-500', 'border-emerald-500');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('text-emerald-500', 'border-emerald-500');
+        }, 2000);
+      } catch {
+        // Clipboard denied — the address is plain text, user can select it.
+      }
+    });
+  });
+</script>

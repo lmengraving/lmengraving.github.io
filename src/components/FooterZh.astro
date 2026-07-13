@@ -1,4 +1,6 @@
 ---
+import { CONTACT } from '../consts';
+
 const currentYear = new Date().getFullYear();
 const uenNumber = "201100206C";
 ---
@@ -23,6 +25,11 @@ const uenNumber = "201100206C";
       <div class="flex items-center justify-center gap-2 mb-6">
         <span class="w-2 h-2 bg-precision-green rounded-full animate-pulse"></span>
         <span class="font-mono text-xs text-precision-green">承接新项目</span>
+      </div>
+
+      <div class="flex flex-col items-center gap-2 mb-6 text-center">
+        <a href={CONTACT.phoneHref} class="font-display text-base text-steel-200 hover:text-laser transition-colors">{CONTACT.phone}</a>
+        <a href={`mailto:${CONTACT.email}`} class="font-display text-base text-steel-200 hover:text-laser transition-colors break-all">{CONTACT.email}</a>
       </div>
 
       <div class="flex flex-col items-center gap-3 text-center">
@@ -67,6 +74,11 @@ const uenNumber = "201100206C";
           <p class="font-body text-steel-400 max-w-md mb-6">
             激光雕刻、3D 模具曲面加工及精密电极制造专家。为医疗、航空航天及注塑行业提供高保真组件标识与纹理解决方案。
           </p>
+          <ul class="space-y-2 mb-6 font-body text-sm">
+            <li><a href={CONTACT.phoneHref} class="text-steel-300 hover:text-laser transition-colors">{CONTACT.phone}</a></li>
+            <li><a href={`mailto:${CONTACT.email}`} class="text-steel-300 hover:text-laser transition-colors">{CONTACT.email}</a></li>
+            <li class="text-steel-400">{CONTACT.address}</li>
+          </ul>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 bg-precision-green rounded-full animate-pulse"></span>
             <span class="font-mono text-xs text-precision-green">承接新项目</span>

@@ -1,4 +1,6 @@
 ---
+import { CONTACT } from '../consts';
+
 const currentYear = new Date().getFullYear();
 const uenNumber = "201100206C";
 ---
@@ -24,6 +26,11 @@ const uenNumber = "201100206C";
       <div class="flex items-center justify-center gap-2 mb-6">
         <span class="w-2 h-2 bg-precision-green rounded-full animate-pulse"></span>
         <span class="font-mono text-xs text-precision-green">Accepting Projects</span>
+      </div>
+
+      <div class="flex flex-col items-center gap-2 mb-6 text-center">
+        <a href={CONTACT.phoneHref} class="font-display text-base text-steel-200 hover:text-laser transition-colors">{CONTACT.phone}</a>
+        <a href={`mailto:${CONTACT.email}`} class="font-display text-base text-steel-200 hover:text-laser transition-colors break-all">{CONTACT.email}</a>
       </div>
 
       <div class="flex flex-col items-center gap-3 text-center">
@@ -70,6 +77,11 @@ const uenNumber = "201100206C";
             Specialists in laser engraving, 3D mold surfacing, and precision electrode manufacturing.
             Providing high-fidelity component identification and texturing solutions for the medical, aerospace, and injection molding industries.
           </p>
+          <ul class="space-y-2 mb-6 font-body text-sm">
+            <li><a href={CONTACT.phoneHref} class="text-steel-300 hover:text-laser transition-colors">{CONTACT.phone}</a></li>
+            <li><a href={`mailto:${CONTACT.email}`} class="text-steel-300 hover:text-laser transition-colors">{CONTACT.email}</a></li>
+            <li class="text-steel-400">{CONTACT.address}</li>
+          </ul>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 bg-precision-green rounded-full animate-pulse"></span>
             <span class="font-mono text-xs text-precision-green">Accepting Projects</span>

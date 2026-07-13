@@ -1,12 +1,12 @@
 ---
 /**
- * ContactSection.astro
+ * ContactSection.astro (Chinese)
  *
- * Updated contact section with spam-protected contact info.
- * Uses ObfuscatedEmail and ObfuscatedPhone components to prevent bot harvesting.
+ * Contact info is rendered as plain text/links — the email address is the
+ * business's only contact channel, so findability beats spam obfuscation.
  */
-import ObfuscatedEmail from './ObfuscatedEmail.astro';
-import ObfuscatedPhone from './ObfuscatedPhone.astro';
+import EmailContact from './EmailContact.astro';
+import { CONTACT } from '../consts';
 ---
 
 <section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
@@ -30,9 +30,17 @@ import ObfuscatedPhone from './ObfuscatedPhone.astro';
 
         <div class="flex flex-col gap-4">
 
-          <ObfuscatedPhone lang="zh" />
+          <a href={CONTACT.phoneHref} class="group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors">
+            <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+            </div>
+            <div>
+              <div class="font-mono text-[10.5px] tracking-wider text-steel-400 uppercase group-hover:text-laser transition-colors">电话</div>
+              <div class="font-display text-lg text-white">{CONTACT.phone}</div>
+            </div>
+          </a>
 
-          <ObfuscatedEmail variant="button" lang="zh" />
+          <EmailContact variant="button" lang="zh" />
 
           <a href="https://maps.app.goo.gl/y8muUsqGeMGKWZo36" target="_blank" rel="noopener" class="group flex items-center gap-4 p-5 bg-steel-950 border border-steel-800 hover:border-laser/50 transition-colors">
             <div class="w-12 h-12 flex items-center justify-center bg-steel-900 text-steel-400 group-hover:text-laser transition-colors shrink-0">
@@ -99,7 +107,7 @@ import ObfuscatedPhone from './ObfuscatedPhone.astro';
             </div>
           </div>
 
-          <ObfuscatedEmail variant="inline" lang="zh" />
+          <EmailContact variant="inline" lang="zh" />
            
           <div class="mt-4 text-center">
             <span class="font-mono text-[10px] text-steel-400 uppercase">接受的文件格式：STEP, IGES, DXF, DWG, PDF</span>
